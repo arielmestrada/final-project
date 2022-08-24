@@ -1,19 +1,18 @@
 default: &default
-  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  port: 5432
   adapter: postgresql
-  username: <%= ENV.fetch("DATABASE_USERNAME") { 'user_1' } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { '12345678' } %>
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development: 
+development:
   <<: *default
-  database: rails_project_development
+  database: final-project_development
 
 test:
   <<: *default
-  database: rails_project_test
+  database: final-project_test
 
 production:
   <<: *default
-  detabase: rails_project_production
+  database: final-project_production
+  username: final-project
+  password: <%= ENV["FINAL-PROJECT_DATABASE_PASSWORD"] %>
