@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_25_085849) do
     t.boolean "admin?", default: false
     t.boolean "banned?", default: false
     t.string "image_url"
+    t.text "user_preferences", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
