@@ -14,7 +14,11 @@
       </div>
       <div class="form-group">
         <%= f.label :mobile_number %><br />
-        <%= f.telephone_field :mobile_number, autocomplete: "off", class: 'form-control', pattern:"[0-9]*", placeholder: "09xxxxxxxxx", minlength: 11, required: true %>
+        <%= f.telephone_field :mobile_number, autocomplete: "off", class: 'form-control', pattern:"[0-9]*", placeholder: "09xxxxxxxxx", minlength: 11, maxlength: 11, required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :birthdate %><br />
+        <%= f.date_field :birthdate, class: 'form-control', max:"2004-01-01", min:"1922-01-01" , required: true %>
       </div>
       <div class="form-group">
         <%= f.label :sex %><br />
