@@ -1,0 +1,18 @@
+%div.container-fluid.px-5.mb-5
+    %div.card.bg-dark.text-light
+        =image_tag 'dog_background_image.jpg', class: 'card-img-top'
+        %div.card-header
+            %h4= "#{@profile.first_name} #{@profile.last_name}"
+            %p.card-subtitle.mb-2.text-muted 
+                %span= @user_preferences.count
+                %span preferences 
+            %p  
+                - @user_preferences.each do |breed|
+                    %span.badge.rounded-pill.bg-primary= breed.name
+        %div.card-body
+            %h6.card-text= "Email: #{@profile.email}"
+            %h6.card-text= "Birthdate: #{@profile.birthdate.strftime('%B %m, %Y')}"
+            %h6.card-text= "Gender: #{@profile.sex}"
+            = link_to('Go back', dashboard_path, class: "btn btn-primary mt-2")
+
+    

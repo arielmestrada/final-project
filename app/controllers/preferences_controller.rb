@@ -6,10 +6,10 @@ class PreferencesController < ApplicationController
   def create
     respond_to do |format|
       count = view_context.fetch_preferences(params)
-      if count < 1
-        redirect_to preferences_path
+      if count == 0
+        format.html { redirect_to dashboard_path }
       else
-        format.html { redirect_to preferences_path, notice: "You added #{count} preferences" }
+        format.html { redirect_to dashboard_path, notice: "You added #{count} preferences" }
       end
     end
   end
