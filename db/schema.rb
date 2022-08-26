@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_25_085849) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "mobile_number"
+    t.bigint "mobile_number"
     t.date "birthdate"
     t.string "sex"
     t.boolean "admin?", default: false

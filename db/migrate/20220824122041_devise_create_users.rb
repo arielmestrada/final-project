@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       ## Added columns
       t.string :first_name
       t.string :last_name
-      t.integer :mobile_number
+      t.integer :mobile_number, limit: 8
       t.date :birthdate
       t.string :sex
       t.boolean :admin?, default: false
