@@ -8,8 +8,8 @@ module PreferencesHelper
 
       user_preference << key
       count << key
-      current_user.save
     end
+    current_user.save
     count.length
   end
 

@@ -10,6 +10,19 @@
                 - @user_preferences.each do |breed|
                     %span.badge.rounded-pill.bg-primary= breed.name
         %div.card-body
+            - unless (@profile.id == current_user.id)
+                - if @request.nil?
+                    = link_to('Add friend', add_friend_path(@profile.id), class: "btn btn-success btn-sm my-2")
+                - elsif (@request.is_approver?) && !(@request.is_friends?)
+                    %div.d-flex
+                        = button_to('Accept', accept_path(@profile.id), class: 'btn btn-sm btn-success my-2', style: "margin-right: 10px")
+                        = button_to("Decline", decline_path(@profile.id), class: 'btn btn-sm btn-danger my-2')
+                - elsif @request.is_friends?
+                    %div.my-2.text-success.fw-bold
+                        %i.fa-solid.fa-check
+                        %span Friends
+                - else
+                    %button.btn.btn-sm.disabled.btn-success.my-2 Request sent
             %h6.card-text= "Email: #{@profile.email}"
             %h6.card-text= "Birthdate: #{@profile.birthdate.strftime('%B %m, %Y')}"
             %h6.card-text= "Gender: #{@profile.sex}"

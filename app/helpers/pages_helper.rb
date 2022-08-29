@@ -6,4 +6,8 @@ module PagesHelper
     end
     preferences
   end
+
+  def find_friend(user)
+    current_user.friends.find_by(friend_id: user.id)
+  end
 end

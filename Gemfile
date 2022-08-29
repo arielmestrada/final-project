@@ -18,8 +18,11 @@ gem 'devise'
 gem 'cancancan'
 gem 'hamlit-rails'
 gem 'bootstrap'
+gem 'jquery-rails'
 gem 'devise-bootstrapped'
 gem 'httparty'
+gem "font-awesome-sass"
+gem 'hotwire-rails'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -36,3 +39,6 @@ group :test do
   gem "webdrivers"
   gem 'rspec-rails'
 end
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
