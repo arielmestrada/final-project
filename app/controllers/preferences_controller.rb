@@ -1,10 +1,16 @@
 class PreferencesController < ApplicationController
   def index
-    @preferences = Breed.all
+    @preferences = view_context.hide_preferences(Breed.all)
   end
 
   def create
-    binding.pry
-    redirect_to preferences_path
+    respond_to do |format|
+      count = view_context.fetch_preferences(params)
+      if count == 0
+        format.html { redirect_to dashboard_path }
+      else
+        format.html { redirect_to dashboard_path, notice: "You added #{count} preferences" }
+      end
+    end
   end
 end

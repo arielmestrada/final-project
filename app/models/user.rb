@@ -8,4 +8,8 @@ class User < ApplicationRecord
   after_create_commit { broadcast_append_to "users" }
 
   has_many :messages
+  
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :birthdate, presence: true
 end

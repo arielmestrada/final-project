@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_034425) do
     t.bigint "mobile_number"
     t.date "birthdate"
     t.string "sex"
+    t.integer "login_count", default: 0
     t.boolean "admin?", default: false
     t.boolean "banned?", default: false
     t.string "image_url"
