@@ -7,7 +7,7 @@ class FriendsController < ApplicationController
     user = view_context.check_if_user_valid(params[:username])
     respond_to do |format|
       if user.nil?
-        format.html { redirect_to friends_path, notice: 'User not found' }
+        format.html { redirect_to friends_path, alert: 'User not found' }
       else
         format.html { redirect_to friends_path(username: params[:username]) }
       end
@@ -19,21 +19,21 @@ class FriendsController < ApplicationController
       @user = User.find(params[:id])
       view_context.add_friend(@user)
       format.turbo_stream
-      format.html { redirect_to dashboard_path, notice: 'Request sent!' }
+      format.html { redirect_to dashboard_path, success: 'Request sent!' }
     end
   end
 
   def decline
     respond_to do |format|
       view_context.decline(params[:id].to_i)
-      format.html { redirect_to view_profile_path(params[:id]), notice: 'Request decline' }
+      format.html { redirect_to view_profile_path(params[:id]), alert: 'Request decline' }
     end
   end
 
   def accept
     respond_to do |format|
       view_context.accept(params[:id].to_i)
-      format.html { redirect_to view_profile_path(params[:id]), notice: 'Successfully added to friends' }
+      format.html { redirect_to view_profile_path(params[:id]), success: 'Successfully added to friends' }
     end
   end
 end
