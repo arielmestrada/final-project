@@ -18,8 +18,11 @@ gem 'devise'
 gem 'cancancan'
 gem 'hamlit-rails'
 gem 'bootstrap'
+gem 'sassc-rails'
+gem 'jquery-rails'
 gem 'devise-bootstrapped'
 gem 'httparty'
+gem "font-awesome-sass"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
