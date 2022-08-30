@@ -10,21 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_25_100410) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_27_034425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "breeds", force: :cascade do |t|
+    t.string "name"
+    t.string "bred_for"
+    t.string "breed_group"
+    t.string "facts"
+    t.text "temperament", default: [], array: true
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_breeds_on_name", unique: true
+  end
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "group", default: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "channel_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_participants_on_channel_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "mobile_number"
+    t.bigint "mobile_number"
     t.date "birthdate"
     t.string "sex"
     t.boolean "admin?", default: false
     t.boolean "banned?", default: false
     t.string "image_url"
+    t.text "user_preferences", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -38,4 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_25_100410) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "channels"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participants", "channels"
+  add_foreign_key "participants", "users"
 end

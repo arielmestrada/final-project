@@ -1,0 +1,8 @@
+%div.container
+    %h1 Preferences
+    = form_with url: "/preferences", method: :post do |f|
+        - @preferences.each do |breed|
+            %div.container
+                = f.check_box breed.name, {}, "true", "false"
+                = f.label breed.name
+        = f.submit
