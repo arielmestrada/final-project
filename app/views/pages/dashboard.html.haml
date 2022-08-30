@@ -2,5 +2,6 @@
     %h1 Dashboard
     %h6 Preferences
     = button_to('signout', destroy_user_session_path, method: :delete, class: "btn btn-primary")
-    = link_to('profile', view_profile_path(current_user))
     = link_to('preferences', preferences_path)
+    = link_to('messages', channels_path)
+    = link_to('profile', view_profile_path(current_user))
