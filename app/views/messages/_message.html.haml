@@ -1,0 +1,6 @@
+%div{class:'cont-' + message.user.id.to_s}
+    %div{class:'message-box msg-' + message.user.id.to_s}
+        - unless message.channel.group == false
+            %h6.name
+                = message.user.email
+        = message.body
