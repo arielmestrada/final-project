@@ -22,4 +22,14 @@ module ApplicationHelper
     when 'alert' then 'fa-solid fa-bell'
     end
   end
+
+  def pending_request
+    current_user.friends.where(is_friends: false, is_approver: true)
+  end
+
+  def pending_friends
+    Friend.where(user_id: current_user.id, is_approver: true, is_friends: false).pluck(:friend_id).map do |id|
+      User.find(id)
+    end
+  end
 end
