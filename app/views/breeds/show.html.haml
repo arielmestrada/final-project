@@ -1,0 +1,8 @@
+%div
+    %h1= @breed.name
+    - @breed.temperament.each do |temp|
+        %p=temp   
+    
+    %p= @breed.facts
+
+    = link_to "News Feed", breed_posts_path(@breed)
