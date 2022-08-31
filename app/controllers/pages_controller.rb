@@ -5,8 +5,9 @@ class PagesController < ApplicationController
   def dashboard; end
 
   def view_profile
-    @profile = User.find(params[:id])
-    @request = view_context.find_friend(@profile)
+    @profile = User.find(params[:id]) if params[:id].present?
+    request = view_context.find_friend(@profile)
+    @request = view_context.find_friend(@profile) unless request.nil?
     @user_preferences = view_context.get_user_preferences(@profile)
   end
 

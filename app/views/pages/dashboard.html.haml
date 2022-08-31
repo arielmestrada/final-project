@@ -1,8 +1,4 @@
 %div.container
     %h1 Dashboard
-    = button_to('signout', destroy_user_session_path, method: :delete, class: "btn btn-primary")
-    = link_to('preferences', preferences_path)
-    = link_to('messages', channels_path)
-    = link_to('profile', view_profile_path(current_user))
-    = link_to('Search User', friends_path)
+
 
