@@ -1,0 +1,7 @@
+%h1= "Posts for #{@breed.name}"
+
+= turbo_stream_from "posts"
+%div#posts
+    = render 'posts/new_post_form'
+
+= render @posts

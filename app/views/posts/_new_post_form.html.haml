@@ -1,0 +1,6 @@
+%div.form-group.post-form
+    = form_with(model:[@breed, @post], remote: true) do |f|
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :breed_id, value: @breed.id
+        = f.text_field :body, class:"form-control", autocomplete: 'off'
+        = f.submit data: {disable_with: false}, class:'btn btn-primary'
