@@ -1,23 +1,4 @@
 module FriendsHelper
-  def check_if_user_valid(params)
-    return nil if params.count('0-9') > 0
-
-    user_arr = params.split(/\s/)
-    firstname = User.arel_table[:first_name]
-    last_name = User.arel_table[:last_name]
-    if user_arr[1].nil?
-      user = User.where(firstname.matches("%#{user_arr[0]}%"))
-      return nil if user.empty?
-
-      user
-    else
-      user = User.where(firstname.matches("%#{user_arr[0]}%")).where(last_name.matches("%#{user_arr[user_arr.length - 1]}%"))
-      return nil if user.empty?
-
-      user
-    end
-  end
-
   def show_user(params)
     user_arr = params.split(/\s/)
     firstname = User.arel_table[:first_name]
@@ -46,7 +27,7 @@ module FriendsHelper
 
   def decline(user)
     current_user.friends.find_by(friend_id: user).destroy
-    user_receiver = User.find_by(id: user)
+    user_receiver = User.find(user)
     user_receiver.friends.find_by(user_id: user).destroy
   end
 
@@ -59,5 +40,11 @@ module FriendsHelper
     receiver = user_receiver.friends.find_by(user_id: user)
     receiver.is_friends = true
     receiver.save
+  end
+
+  def unfriend(user)
+    current_user.friends.find_by(friend_id: user).destroy
+    u = User.find(params[:id].to_i)
+    u.friends.find_by(friend_id: current_user.id).destroy
   end
 end

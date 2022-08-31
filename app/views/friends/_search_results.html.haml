@@ -1,0 +1,16 @@
+- unless params[:username].empty?
+    %table.table
+        %thead.table-dark
+            %tr
+                %th First Name
+                %th Last Name
+                %th Preferences
+                %th Details
+        %tbody
+            - users.each do |user|
+                %tr
+                    %th= highlight(user.first_name.capitalize, params[:username])
+                    %th= user.last_name.capitalize
+                    %th= "#{user.user_preferences.count} Preferences"
+                    - unless current_user.id == user.id
+                        %th= link_to('view profile', view_profile_path(user))

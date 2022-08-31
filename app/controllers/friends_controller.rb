@@ -1,15 +1,12 @@
 class FriendsController < ApplicationController
-  def index
-    @users = view_context.show_user(params[:username]) if params[:username].present?
-  end
+  def index; end
 
   def create
-    user = view_context.check_if_user_valid(params[:username])
+    @users = view_context.show_user(params[:username])
     respond_to do |format|
-      if user.nil?
-        format.html { redirect_to friends_path, alert: 'User not found' }
-      else
-        format.html { redirect_to friends_path(username: params[:username]) }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('search_results', partial: 'friends/search_results',
+                                                                   locals: { users: @users })
       end
     end
   end
@@ -18,15 +15,17 @@ class FriendsController < ApplicationController
     respond_to do |format|
       @user = User.find(params[:id])
       view_context.add_friend(@user)
-      format.turbo_stream
-      format.html { redirect_to dashboard_path, success: 'Request sent!' }
+      format.html { redirect_to view_profile_path(params[:id]), success: 'Request sent!' }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('request')
+      end
     end
   end
 
   def decline
     respond_to do |format|
       view_context.decline(params[:id].to_i)
-      format.html { redirect_to view_profile_path(params[:id]), alert: 'Request decline' }
+      format.html { redirect_to view_profile_path(params[:id]), alert: 'Request denied' }
     end
   end
 
@@ -34,6 +33,13 @@ class FriendsController < ApplicationController
     respond_to do |format|
       view_context.accept(params[:id].to_i)
       format.html { redirect_to view_profile_path(params[:id]), success: 'Successfully added to friends' }
+    end
+  end
+
+  def unfriend
+    respond_to do |format|
+      view_context.unfriend(params[:id])
+      format.html { redirect_to view_profile_path(params[:id]), alert: 'Unfriended' }
     end
   end
 end
