@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :preferences, only: %i[index create]
   resources :friends, only: %i[index create]
 
+  resources :breeds do
+    resources :posts
+  end
+
   post 'user/:id/decline' => 'friends#decline', as: 'decline'
   post 'user/:id/accept' => 'friends#accept', as: 'accept'
   get 'addfriend/:id' => 'friends#add_friend', as: 'add_friend'
