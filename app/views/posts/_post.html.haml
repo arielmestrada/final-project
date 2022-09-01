@@ -1,2 +1,6 @@
-%div
+%div{ id:"post_#{post.id}" }
     %h3= post.body
+      
+    %div{ id:"post_#{post.id}_comments" }
+        = render post.comments, post: post
+    = render 'comments/new_comment_form', post: post

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   
   resources :breeds do
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
   end
   
   delete 'user/:id/unfriend' => 'friends#unfriend', as: 'unfriend'

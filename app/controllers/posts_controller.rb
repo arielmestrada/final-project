@@ -5,10 +5,13 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = @breed.posts.order(created_at: :desc)
+
+    @comment = Comment.new
     render 'posts/index'
   end
 
   def create
+    @comment = Comment.new
     respond_to do |format|
       @post = Post.create(post_params)
       format.html { redirect_to breed_posts_path(params[:breed_id]), success: 'Post created successfully!' }
