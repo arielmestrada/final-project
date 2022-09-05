@@ -3,13 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :new_user
   add_flash_types :info, :error, :warning, :success
 
-  protected
+  protected  
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name mobile_number birthdate sex])
   end
 
   def after_sign_in_path_for(_resource)
+    # cookies[:uid] = current_user&.id || 'guest'
     login_count = view_context.count_user_login
     if login_count > 1
       dashboard_path

@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :get_breed
 
   def index
+    @user = current_user
     @post = Post.new
     @posts = @breed.posts.order(created_at: :desc)
 
@@ -16,6 +17,16 @@ class PostsController < ApplicationController
       @post = Post.create(post_params)
       format.html { redirect_to breed_posts_path(params[:breed_id]), success: 'Post created successfully!' }
     end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update(body: params[:post][:body])
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
   end
 
   private
