@@ -1,31 +1,30 @@
-.container-fluid.mt-2
+.container-fluid.mt-5.px-5
     - if pending_request().count > 0
-        .container
-            %h4 Friend Request
-            %ul.list-group{style: "max-width: 500px;"}
-                - pending_friends().each do |user|
-                    %li.list-group-item.list-group-item-primary.d-flex.align-items-center.justify-content-between
-                        %span.d-flex.align-items-center
-                            = image_tag 'user.png', style: "max-width: 40px;"
-                            %h5{style: "margin: 0 0 0 10px"}= "#{user.first_name} #{user.last_name}"
-                        %span.d-flex.align-items-center
-                            = button_to("Accept", accept_path(user.id), class:"btn btn-success btn-sm", style: "margin-right: 5px;") 
-                            = button_to("Decline", decline_path(user.id), class: "btn btn-danger btn-sm" )
-    .container.my-3
+        .border-bottom.border-dark.w-25.mb-4.pb-2
+            %h4.m-0.p-0 Friend Requests
+        .container-fluid
+            - pending_friends().each do |user|
+                .card{style: 'width: 250px;'}
+                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    .card-body
+                        %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
+                        = button_to("Accept", accept_path(user.id), class:"btn btn-primary w-100 mb-2") 
+                        = button_to("Decline", decline_path(user.id), class: "btn btn-outline-primary w-100" )
+    .my-3
         %nav.navbar
-            %h3 Friends
+            .border-bottom.border-dark.w-25.mb-2.pb-2
+                %h3 Friends
             = form_with url: view_friends_post_path, method: :post, class: "form-inline d-flex" do |f|
                 = f.text_field :username, placeholder: "Search friend", oninput: "this.form.requestSubmit()" , class: "form-control mr-sm-2"
-    %div.container.my-3{id: "search_friends_results"}
+    .my-3{id: "search_friends_results"}
 
-    .container
-        %ul.list-group
+    .mb-5
+        .container-fluid
             - @friends.each do |friend|
-                %li.list-group-item.list-group-item-success.d-flex.align-items-center.justify-content-between
-                    %span.d-flex.align-items-center
-                        = image_tag 'user.png', style: "max-width: 40px;"
-                        %h5{style: "margin: 0 0 0 10px;"}= "#{friend.first_name} #{friend.last_name}"
-                    %span.d-flex.align-items-center
-                        = link_to('view profile', view_profile_path(friend))
-
+                .card{style: 'width: 250px'}
+                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    .card-body
+                        %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
+                        = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')
+                        = link_to('Message', root_path, class: 'btn  btn-outline-primary w-100')
     
