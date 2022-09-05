@@ -12,6 +12,8 @@
                 .nav-item
                     = link_to('Messages', channels_path, class: "nav-link")
                 .nav-item
+                    = link_to('Dog Community', breeds_path, class: "nav-link")
+                .nav-item
                     = link_to( friends_path, class: "nav-link") do 
                         %i.fa-solid.fa-magnifying-glass
             - if pending_request().count > 0
