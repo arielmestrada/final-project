@@ -5,46 +5,17 @@
             %div.d-flex.align-items-center.justify-content-between
                 %h4= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
                 - if current_user.id == params[:id].to_i || !(@friend.nil?)
-                    %button.btn.btn-outline-light{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop"}
-                        %i.fa-solid.fa-ellipsis
-                    .modal.fade{id: "staticBackdrop", "data-bs-backdrop": "static", "data-bs-keyboard": "false", "tabindex": "-1", "aria-labelledby": "staticBackdropLabel", "aria-hidden": "true"}
-                        .modal-dialog.modal-dialog-scrollable
-                            .modal-content
-                                .modal-header
-                                    - if current_user.id == params[:id].to_i
-                                        %h5.modal-title{id: "staticBackdropLabel"} Profile
-                                    - unless @friend.nil?
-                                        %h5.modal-title{id: "staticBackdropLabel"}= "#{@profile.first_name.capitalize}'s Profile"
-                                    %button.btn-close{"data-bs-dismiss": "modal", "aria-label": "Close"}
-                                .modal-body
-                                    %div.d-flex.flex-column
-                                        - if current_user.id == params[:id].to_i
-                                            = link_to('Edit profile', edit_user_registration_path, class: "btn btn-info btn-sm mb-2")
-                                            = link_to("Add more preferences", preferences_path, class: "btn btn-warning btn-sm")
-                                        - unless (@friend.nil?)
-                                            = button_to('Unfriend', unfriend_path(@profile.id), class: "btn btn-danger btn-sm", method: :delete)
-                                .modal-footer 
+                    = render 'modals/user_modal', id: (params[:id].to_i), profile: @profile, friend: @friend
             %p.card-subtitle.mb-2.text-muted 
                 %span= @user_preferences.count
                 %span preferences 
             %p  
                 - @user_preferences.each do |breed|
                     %span.badge.rounded-pill.bg-primary= breed.name
-        %div.card-body{id: "request"}
-            - unless (@profile.id == current_user.id)
-                - if @request.nil?
-                    = link_to('Add friend', add_friend_path(@profile.id), class: "btn btn-success btn-sm my-2")
-                - elsif (@request.is_approver?) && !(@request.is_friends?)
-                    %div.d-flex
-                        = button_to('Accept', accept_path(@profile.id), class: 'btn btn-sm btn-success my-2', style: "margin-right: 10px")
-                        = button_to("Decline", decline_path(@profile.id), class: 'btn btn-sm btn-danger my-2')
-                - elsif @request.is_friends?
-                    %div.my-2.text-success.fw-bold
-                        %i.fa-solid.fa-check
-                        %span Friends
-                - else
-                    %button.btn.btn-sm.disabled.btn-success.my-2 Request sent
+        %div.card-body
+            = render 'friends/request', profile: @profile, request: @request
             %h6.card-text= "Email: #{@profile.email}"
             %h6.card-text= "Birthdate: #{@profile.birthdate.strftime('%B %m, %Y')}"
             %h6.card-text= "Gender: #{@profile.sex}"
+
     

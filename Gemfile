@@ -23,6 +23,7 @@ gem 'jquery-rails'
 gem 'devise-bootstrapped'
 gem 'httparty'
 gem "font-awesome-sass"
+gem "pusher"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

@@ -1,5 +1,0 @@
-%nav.navbar
-    = form_with url: "/friends", method: :post, class: "form-inline d-flex mx-auto" do |f|
-        = f.text_field :username, placeholder: "Search user", oninput: "this.form.requestSubmit()" , class: "form-control mr-sm-2"
-
-%div.container{id: "search_results"}

@@ -32,4 +32,10 @@ module ApplicationHelper
       User.find(id)
     end
   end
+
+  def all_friends
+    current_user.friends.where(is_friends: true).pluck(:friend_id).map do |id|
+      User.find(id)
+    end
+  end
 end

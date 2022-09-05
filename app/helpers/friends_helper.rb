@@ -10,25 +10,48 @@ module FriendsHelper
     end
   end
 
-  def add_friend(user)
-    user.friends.create(
-      is_approver: true,
-      is_friends: false,
-      user_id: user.id,
-      friend_id: current_user.id
-    )
-    current_user.friends.create(
-      is_approver: false,
-      is_friends: false,
-      user_id: current_user.id,
-      friend_id: user.id
-    )
+  def add_friend_request(user)
+    receiver = User.find(user.id)
+    receiver = receiver.friends.new
+    receiver.is_approver = true
+    receiver.is_friends = false
+    receiver.user_id = user.id
+    receiver.friend_id = current_user.id
+
+    requester = current_user.friends.new
+    requester.is_approver = false
+    requester.is_friends = false
+    requester.user_id = current_user.id
+    requester.friend_id = user.id
+    # user.friends.create(
+    #   is_approver: true,
+    #   is_friends: false,
+    #   user_id: user.id,
+    #   friend_id: current_user.id
+    # )
+
+    # current_user.friends.create(
+    #   is_approver: false,
+    #   is_friends: false,
+    #   user_id: current_user.id,
+    #   friend_id: user.id
+    # )
+
+    if current_user.friends.find_by(friend_id: @profile.id).nil?
+      receiver.save
+      requester.save
+    end
+
+    pusher = Pusherapi::Client.call
+    pusher.trigger('add_friend', 'add_friend_event', { message: 'add' })
   end
 
   def decline(user)
     current_user.friends.find_by(friend_id: user).destroy
     user_receiver = User.find(user)
     user_receiver.friends.find_by(user_id: user).destroy
+    pusher = Pusherapi::Client.call
+    pusher.trigger('decline_request', 'decline_event', { message: 'decline' })
   end
 
   def accept(user)
@@ -37,14 +60,19 @@ module FriendsHelper
     friend.save
 
     user_receiver = User.find_by(id: user)
-    receiver = user_receiver.friends.find_by(user_id: user)
+    receiver = user_receiver.friends.find_by(friend_id: current_user.id)
     receiver.is_friends = true
     receiver.save
+    pusher = Pusherapi::Client.call
+    pusher.trigger('accept_request', 'accept_event', { message: 'accept' })
   end
 
   def unfriend(user)
     current_user.friends.find_by(friend_id: user).destroy
     u = User.find(params[:id].to_i)
     u.friends.find_by(friend_id: current_user.id).destroy
+
+    pusher = Pusherapi::Client.call
+    pusher.trigger('unfriend_request', 'unfriend_event', { message: 'unfriended' })
   end
 end
