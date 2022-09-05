@@ -1,38 +1,48 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+= javascript_tag 
+
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.px-5
     .container-fluid
-        %a.navbar-brand{:href => "#"} Logo
+        %a.navbar-brand{:href => "#"}
+            = image_tag 'foot-print.png', alt: 'foot-print', width: '30px', class: 'd-inline-block align-text-top'
+            Woofie
+        = render 'modals/search_user_modal'
         %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
             %span.navbar-toggler-icon
         #navbarSupportedContent.collapse.navbar-collapse
-            .navbar-nav.me-auto.mb-2.mb-lg-0
+            .navbar-nav.mx-auto.mb-2.mb-lg-0
                 .nav-item
-                    = link_to('Home', dashboard_path, class: "nav-link")
+                    = link_to('Home', dashboard_path, class: "nav-link text-primary", id: 'home_header')
                 .nav-item
-                    = link_to('Profile', view_profile_path(current_user), class: "nav-link")
+                    = link_to('Dog Community', root_path, class: "nav-link text-primary")
+                .nav-item 
+                    = link_to('Friends', view_friends_path, class: "nav-link text-primary", id: 'friends_header')
+                /* If current user is admin
+                -# .nav-item
+                -#     = link_to('Users', channels_path, class: "nav-link")
                 .nav-item
-                    = link_to('Messages', channels_path, class: "nav-link")
-                .nav-item
-                    = link_to( friends_path, class: "nav-link") do 
-                        %i.fa-solid.fa-magnifying-glass
+            %div{style: 'margin-right: 5px;'}
+                = link_to( channels_path, class: "btn btn-info btn-sm text-light") do
+                    %i.fa-solid.fa-envelope
+                    Messages
             - if pending_request().count > 0
-                %div{style: "margin-right: 5px;"}
-                    %button.btn.btn-primary{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop"}
-                        %i.fa-solid.fa-user-group
-                        %span.badge.badge-dark= pending_request().count
-                    .modal.fade{id: "staticBackdrop", "data-bs-backdrop": "static", "data-bs-keyboard": "false", "tabindex": "-1", "aria-labelledby": "staticBackdropLabel", "aria-hidden": "true"}
-                        .modal-dialog.modal-dialog-scrollable
-                            .modal-content
-                                .modal-header
-                                    %h5.modal-title{id: "staticBackdropLabel"} Friend Requests
-                                    %button.btn-close{"data-bs-dismiss": "modal", "aria-label": "Close"}
-                                .modal-body 
-                                    %ul.list-group
-                                        - pending_friends().each do |user|
-                                            %li.list-group-item.d-flex.justify-content-between.align-items-center
-                                                %span= "#{user.first_name} #{user.last_name}"
-                                                %div.d-flex.align-items-center.justify-content-between
-                                                    = button_to("accept", accept_path(user.id), class: "btn btn-success", style: "margin-right: 5px")
-                                                    = button_to("decline", decline_path(user.id), class: "btn btn-danger")
-                                    
-            .d-flex
-                = button_to('Log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary my-2 my-sm-0")
+                %div.my-1{style: "margin-right: 5px;"}
+                    = render 'modals/pending_modal'
+            %div
+                = render 'modals/user_profile_modal'
+                -# .nav-item
+                -#     = link_to('Messages', channels_path, class: "nav-link")
+
+
+-# :javascript
+-#     var userInput = document.querySelector('#username')
+-#     document.querySelector('#search_results').addEventListener('click', ()=>{
+-#         userInput.value = ""
+-#     })
+
+-#     document.querySelector('#home_header').addEventListener('click', ()=>{
+-#         userInput.value = ""
+-#     })
+
+-#     document.querySelector('#friends_header').addEventListener('click', ()=>{
+-#         userInput.value = ""
+-#     })
