@@ -20,9 +20,60 @@
   </head>
   <body>
     <% if user_signed_in?  %>
+      <%= render 'layouts/alerts' %>
       <%= render "layouts/header" %>
+      <div style='min-height: 100vh'>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer' %>
+    <% else %>
+      <%= render 'layouts/alerts' %>
+      <section class='container-fluid d-flex align-items-center justify-content-center'>
+        <div class="row d-flex align-items-center justify-content-center" style='min-height: 100vh; min-width: 80vw; max-width: 90vw'>
+          <div class='col-lg-7'>
+            <h1>Woofie</h1>
+            <h5 class='text-secondary'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</h5>
+            <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+              <%= link_to "Sign up", new_registration_path(resource_name), class: "btn btn-outline-primary" %>
+            <% end %>
+            <% if controller_name != 'sessions' %>
+              <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
+          <div class='col-lg-5 p-5 border rounded-1 shadow'>
+            <%= yield %>
+          </div>
+        </div>
+      </section>
     <% end %>
-    <%= render 'layouts/alerts' %>
-    <%= yield %>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher( Rails.application.config.x.pusher, {
+        cluster: 'eu'
+      });
+
+      var channel = pusher.subscribe('add_friend');
+      channel.bind('add_friend_event', (data)=> {
+        location.reload()
+      });
+
+      var declineChannel = pusher.subscribe('decline_request');
+      declineChannel.bind('decline_event', (data)=>{
+        location.reload()
+      });
+
+      var acceptChannel = pusher.subscribe('accept_request');
+      acceptChannel.bind('accept_event', ()=>{
+        location.reload()
+      })
+
+      var unfriendChannel = pusher.subscribe('unfriend_request')
+      unfriendChannel.bind('unfriend_event', ()=>{
+        location.reload()
+      })
+    </script>
   </body>
 </html>

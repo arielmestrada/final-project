@@ -1,0 +1,30 @@
+.container-fluid.mt-5.px-5
+    - if pending_request().count > 0
+        .border-bottom.border-dark.w-25.mb-4.pb-2
+            %h4.m-0.p-0 Friend Requests
+        .container-fluid
+            - pending_friends().each do |user|
+                .card{style: 'width: 250px;'}
+                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    .card-body
+                        %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
+                        = button_to("Accept", accept_path(user.id), class:"btn btn-primary w-100 mb-2") 
+                        = button_to("Decline", decline_path(user.id), class: "btn btn-outline-primary w-100" )
+    .my-3
+        %nav.navbar
+            .border-bottom.border-dark.w-25.mb-2.pb-2
+                %h3 Friends
+            = form_with url: view_friends_post_path, method: :post, class: "form-inline d-flex" do |f|
+                = f.text_field :username, placeholder: "Search friend", oninput: "this.form.requestSubmit()" , class: "form-control mr-sm-2"
+    .my-3{id: "search_friends_results"}
+
+    .mb-5
+        .container-fluid
+            - @friends.each do |friend|
+                .card{style: 'width: 250px'}
+                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    .card-body
+                        %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
+                        = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')
+                        = link_to('Message', root_path, class: 'btn  btn-outline-primary w-100')
+    

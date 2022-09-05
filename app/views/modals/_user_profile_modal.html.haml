@@ -1,0 +1,17 @@
+%button.btn.rounded-circle.border-0.btn-sm{"data-bs-toggle": "modal", "data-bs-target": "#userModal"}
+    = image_tag 'user.png', alt: 'user', class: '', width: '30px;'
+.modal.fade{id: "userModal", 'data-bs-backdrop': 'static', 'data-bs-keyboard': "false", tabindex: -1, 'aria-labelledby': 'userModal', 'aria-hidden': 'true'}
+    .modal-dialog 
+        .modal-content 
+            .modal-header
+                .d-flex.align-items-center
+                    = image_tag 'user.png', alt: 'user', class: '', width: '100px;'
+                    .d-flex.flex-column{style: 'margin-left: 10px;'}
+                        %h2= "#{current_user.first_name} #{current_user.last_name}"
+                        .d-flex
+                            = link_to('My Profile', edit_user_registration_path, class: "btn btn-outline-info btn-sm", style: "margin-right: 10px;")
+                            = button_to('Sign Out', destroy_user_session_path, class: 'btn btn-outline-info btn-sm', method: :delete)
+            .modal-body
+                %h5.fw-bold Settings 
+            .modal-footer 
+                %button.btn.btn-secondary{'data-bs-dismiss': 'modal'} Close

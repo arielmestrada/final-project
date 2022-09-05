@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2022_08_31_124214) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_124214) do
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
-
+  
   create_table "friends", force: :cascade do |t|
     t.string "nickname"
     t.boolean "is_approver"
@@ -109,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_124214) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"

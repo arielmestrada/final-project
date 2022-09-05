@@ -1,0 +1,19 @@
+%button.btn.btn-outline-light{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop1"}
+    %i.fa-solid.fa-ellipsis
+.modal.fade{id: "staticBackdrop1", "data-bs-backdrop": "static", "data-bs-keyboard": "false", "tabindex": "-1", "aria-labelledby": "staticBackdropLabel", "aria-hidden": "true"}
+    .modal-dialog.modal-dialog-scrollable
+        .modal-content
+            .modal-header
+                - if current_user.id == id
+                    %h5.modal-title{id: "staticBackdropLabel"} Profile
+                - unless friend.nil?
+                    %h5.modal-title{id: "staticBackdropLabel"}= "#{profile.first_name.capitalize}'s Profile"
+                %button.btn-close{"data-bs-dismiss": "modal", "aria-label": "Close"}
+            .modal-body
+                %div.d-flex.flex-column
+                    - if current_user.id == id
+                        = link_to('Edit profile', edit_user_registration_path, class: "btn btn-info btn-sm mb-2")
+                        = link_to("Add more preferences", preferences_path, class: "btn btn-warning btn-sm")
+                    - unless (friend.nil?)
+                        = button_to('Unfriend', unfriend_path(profile.id), class: "btn btn-danger btn-sm", method: :delete)
+            .modal-footer 
