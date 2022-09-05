@@ -1,2 +1,9 @@
 %div
     = link_to breed.name, breed
+    %br/
+    = render "breed_detail_modal", breed: breed
+    %br/
+    = link_to "News Feed", breed_posts_path(breed.id)
+    = button_to "Add Preferred"
+    %br/
+    %br/
