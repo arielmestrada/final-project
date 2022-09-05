@@ -4,7 +4,7 @@
             %li.list-group
                 %h5.text-warning User not found
         - users.each do |user|
-            = link_to( view_profile_path(user), id: 'profile-link', class: 'btn border-0 btn-outline-secondary', style: 'margin-bottom: 5px;') do
+            = link_to( view_profile_path(user), id: 'profile-link', class: 'btn border-0 btn-outline-primary', style: 'margin-bottom: 5px;') do
                 %span.d-flex.align-items-center
                     = image_tag 'user.png', style: "max-width: 50px;"
                     .d-flex.flex-column{style: "margin-left: 20px;"}
@@ -13,7 +13,7 @@
                             - if params[:username].include? " "
                                 %span= "#{highlight(user.last_name.capitalize, params[:username].split(" ")[1])}"
                             - else
-                                %span= "#{user.first_name.capitalize}"
+                                %span= "#{user.last_name.capitalize}"
                         - if params[:action] == "create"
                             -# %span.badge.bg-info= "#{user.user_preferences.count} Dog Preferences"
                             - unless current_user.friends.find_by(friend_id: user.id, is_friends: true).nil?

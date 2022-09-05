@@ -3,9 +3,9 @@ module Pusherapi
     def self.call
       require 'pusher'
       Pusher::Client.new(
-        app_id: '1471758',
-        key: '144480ed232e81e5c86c',
-        secret: '3bf3d3ef1ef9759e0864',
+        app_id: Rails.application.config.x.pusher_id,
+        key: Rails.application.config.x.pusher_app_key,
+        secret: Rails.application.config.x.pusher_secret,
         cluster: 'eu',
         encrypted: true
       )
