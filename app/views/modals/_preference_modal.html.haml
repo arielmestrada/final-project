@@ -1,0 +1,19 @@
+.modal.fade{id: "preferenceModal", "aria-hidden": "true", "aria-labelledby": "preferenceModal", tabindex: -1, 'data-bs-backdrop': 'static', 'data-bs-keyboard': "false" }
+    .modal-dialog
+        .modal-content
+            .modal-header
+                %h5.modal-title{id: 'preferenceModal'} Preferences
+            .modal-body
+                - if hide_preferences(Breed.all).count == 0
+                    %h6.text-success All preferences was added
+                - else
+                    = form_with url: "/preferences", method: :post, class: "container" do |f|
+                        %ul.list-group
+                            - hide_preferences(Breed.all).each do |breed|
+                                %li.list-group-item.list-group-item-primary
+                                    .mask
+                                        = f.check_box breed.name, {}, "true", "false"
+                                        = f.label breed.name
+                        = f.submit "Add", class: "btn btn-sm btn-primary mt-2", "data-bs-dismiss": "modal"
+            .modal-footer
+                %button.btn.btn-secondary{"data-bs-toggle": 'modal', href: "#userModal", role: "button"} Close

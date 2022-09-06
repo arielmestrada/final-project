@@ -14,7 +14,7 @@
                     = link_to('Home', dashboard_path, class: "nav-link text-primary", id: 'home_header')
                 .nav-item
                     = link_to('Dog Community', breeds_path, class: "nav-link text-primary")
-                .nav-item 
+                .nav-item
                     = link_to('Friends', view_friends_path, class: "nav-link text-primary", id: 'friends_header')
                 /* If current user is admin
                 -# .nav-item
@@ -33,18 +33,3 @@
                 = render 'modals/user_profile_modal'
                 -# .nav-item
                 -#     = link_to('Messages', channels_path, class: "nav-link")
-
-
--# :javascript
--#     var userInput = document.querySelector('#username')
--#     document.querySelector('#search_results').addEventListener('click', ()=>{
--#         userInput.value = ""
--#     })
-
--#     document.querySelector('#home_header').addEventListener('click', ()=>{
--#         userInput.value = ""
--#     })
-
--#     document.querySelector('#friends_header').addEventListener('click', ()=>{
--#         userInput.value = ""
--#     })

@@ -75,4 +75,11 @@ module FriendsHelper
     pusher = Pusherapi::Client.call
     pusher.trigger('unfriend_request', 'unfriend_event', { message: 'unfriended' })
   end
+
+  def all_friends(user = current_user.id)
+    uf = User.find(user)
+    uf.friends.where(is_friends: true).pluck(:friend_id).map do |id|
+      User.find(id)
+    end
+  end
 end
