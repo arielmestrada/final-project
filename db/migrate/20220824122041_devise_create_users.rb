@@ -14,8 +14,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.date :birthdate
       t.string :sex
       t.integer :login_count, default: 0
-      t.boolean :admin?, default: false
-      t.boolean :banned?, default: false
+      t.boolean :admin, default: false
+      t.boolean :banned, default: false
       t.string :image_url
       t.text :user_preferences, default: [], array: true
 

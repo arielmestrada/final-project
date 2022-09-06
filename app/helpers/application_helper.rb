@@ -33,9 +33,8 @@ module ApplicationHelper
     end
   end
 
-  def all_friends(user)
-    uf = User.find(user)
-    uf.friends.where(is_friends: true).pluck(:friend_id).map do |id|
+  def waiting_request
+    Friend.where(friend_id: current_user.id, is_approver: true, is_friends: false).pluck(:user_id).map do |id|
       User.find(id)
     end
   end

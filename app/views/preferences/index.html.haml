@@ -1,8 +1,23 @@
 %div.container
     %h1 Preferences
     = form_with url: "/preferences", method: :post do |f|
-        - @preferences.each do |breed|
-            %div.container
-                = f.check_box breed.name, {}, "true", "false"
-                = f.label breed.name
+        .row
+            - @preferences.each do |breed|
+                %div.pref.col-md-3
+                    .custom-control.custom-check.image-checkbox
+                        = f.check_box breed.name, {}, "true", "false"
+                        = f.label breed.name
         = f.submit
+
+:javascript
+    const cbox = document.querySelectorAll(".pref")
+    for(let i =0; i < cbox.length; i++ ){
+        cbox[i].addEventListener('click', ()=>{
+           if (cbox[i].children[1].checked == true){
+            cbox[i].children[1].checked = false
+           }
+           else{
+            cbox[i].children[1].checked = true
+           }
+        })
+    }
