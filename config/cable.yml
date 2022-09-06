@@ -7,5 +7,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDISCLOUD_URL") { "Uo84JGW88jEWyqPaVvPkR54uRs4iiOsy@redis-10981.c258.us-east-1-4.ec2.cloud.redislabs.com:10981" } %>
+  url: <%= ENV.fetch("REDIS_URL") { "redis://:p2e9e90a8ff52e959460e4c3032a50ae95ea07136ea07aab0eca5d6ca31fc6aca@ec2-44-208-126-108.compute-1.amazonaws.com:7189" } %>
   channel_prefix: final_project_production
