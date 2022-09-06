@@ -1,0 +1,15 @@
+.mt-5.h6{style: "margin-left: 50px;"}
+    Contacts
+    .container.mt-4
+        Friends
+        .container.my-2
+            - all_friends().each do |user|
+                %button.btn.text-secondary
+                    %i.fa-solid.fa-user
+                    = "#{user.first_name} #{user.last_name}"
+        Group Chat
+        .container.mt-2.d-flex.flex-column.align-items-start
+            - current_user.user_preferences.each do |dog|
+                %button.btn.text-secondary
+                    %i.fa-solid.fa-paw
+                    = dog

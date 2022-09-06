@@ -9,9 +9,19 @@
                     .d-flex.flex-column{style: 'margin-left: 10px;'}
                         %h2= "#{current_user.first_name} #{current_user.last_name}"
                         .d-flex
-                            = link_to('My Profile', edit_user_registration_path, class: "btn btn-outline-info btn-sm", style: "margin-right: 10px;")
+                            = link_to('My Profile', view_profile_path(current_user), class: "btn btn-outline-info btn-sm", style: "margin-right: 10px;")
                             = button_to('Sign Out', destroy_user_session_path, class: 'btn btn-outline-info btn-sm', method: :delete)
             .modal-body
-                %h5.fw-bold Settings 
+                %h5.fw-bold Settings
+                .d-flex.flex-column.align-items-start
+                    %button.btn
+                        %i.fa-solid.fa-moon
+                        Dark mode
+                    = link_to( edit_user_registration_path, class: "btn" ) do
+                        %i.fa-solid.fa-user
+                        Edit Profile
+                    %button.btn
+                        %i.fa-solid.fa-bone
+                        Add more preference
             .modal-footer 
                 %button.btn.btn-secondary{'data-bs-dismiss': 'modal'} Close

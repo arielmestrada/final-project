@@ -33,8 +33,9 @@ module ApplicationHelper
     end
   end
 
-  def all_friends
-    current_user.friends.where(is_friends: true).pluck(:friend_id).map do |id|
+  def all_friends(user)
+    uf = User.find(user)
+    uf.friends.where(is_friends: true).pluck(:friend_id).map do |id|
       User.find(id)
     end
   end
