@@ -1,21 +1,85 @@
-%div.container-fluid.px-5.mb-5
-    %div.card.bg-dark.text-light
-        =image_tag 'dog_background_image.jpg', class: 'card-img-top'
-        %div.card-header
-            %div.d-flex.align-items-center.justify-content-between
-                %h4= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
-                - if current_user.id == params[:id].to_i || !(@friend.nil?)
-                    = render 'modals/user_modal', id: (params[:id].to_i), profile: @profile, friend: @friend
-            %p.card-subtitle.mb-2.text-muted 
-                %span= @user_preferences.count
-                %span preferences 
-            %p  
-                - @user_preferences.each do |breed|
-                    %span.badge.rounded-pill.bg-primary= breed.name
-        %div.card-body
-            = render 'friends/request', profile: @profile, request: @request
-            %h6.card-text= "Email: #{@profile.email}"
-            %h6.card-text= "Birthdate: #{@profile.birthdate.strftime('%B %m, %Y')}"
-            %h6.card-text= "Gender: #{@profile.sex}"
+.fb-profile.container-fluid.mb-5
+    = image_tag 'dog_background_image.jpg', alt: 'user_background', class: 'fb-image-lg', align: 'left'
+    = image_tag 'user.png', alt: 'user_profile', class: 'fb-image-profile rounded-circle', align: 'left'
+    .fb-profile-text
+        %h1= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
+        %p Lorem ipsum dolor sit amet
+        - if @profile.id == current_user.id
+            = link_to('Edit Profile', edit_user_registration_path, class: "btn btn-outline-info btn-sm mb-3", style: "margin-right: 10px;")
+        = render 'friends/request', profile: @profile, request: @request
+        %ul.nav.nav-tabs
+            %li.nav-item{role: 'presentation'}
+                %button.nav-link.active{id: 'home-tab', "data-bs-toggle": 'tab', "data-bs-target": '#home', "aria-controls": "home", "aria-selected": "true"} Details
+            %li.nav-item{role: 'presentation'}
+                %button.nav-link{id: 'friends-tab', "data-bs-toggle": 'tab', 'data-bs-target': '#friends', 'aria-controls': 'profile', 'aria-selected': 'false'} Friends
+            - if current_user.id != @profile.id
+                - if @request.nil?
+                    %li.nav-item
+                        = button_to('Add friend', add_friend_path(@profile.id), class: "nav-link bg-primary text-light")
+                - unless (@friend.nil?)
+                    %li.nav-item
+                        = button_to('Remove friend', unfriend_path(@profile.id), class: "nav-link bg-danger text-light", method: :delete, form:{ data:{ turbo_confirm: 'Are you sure?' } })
+        .container.tab-content.mt-4{id: 'myTabContent'}
+            .tab-pane.fade.show.active{id: 'home', role: 'tabpanel', 'aria-labelledby': 'home-tab'}
+                %ul.list-group
+                    %li.list-group-item.border-0.border-bottom.h6
+                        %i.fa-solid.fa-paw{style: "margin-right: 5px;"}
+                        %span.fw-bold Preferences:
+                        - @user_preferences.each do |dog|
+                            %span= "#{dog.name},"
+                    %li.list-group-item.border-0.border-bottom.h6
+                        %i.fa-solid.fa-cake-candles{style: "margin-right: 5px;"}
+                        %span= @profile.birthdate.strftime('%B %m, %Y')
+                    %li.list-group-item.border-0.border-bottom.h6
+                        %i.fa-solid.fa-venus-mars{style: "margin-right: 5px;"}
+                        %span= @profile.sex.capitalize
+                    %li.list-group-item.border-0.border-bottom.h6
+                        %span.text-muted.fst-italic= "Joined on #{@profile.created_at.strftime('%B %Y')}"
+            .tab-pane.fade{id: 'friends', role: 'tabpanel', 'aria-labelledby': 'friends-tab'}
+                - all_friends(@profile.id).each do |friend|
+                    .card{style: 'width: 250px;'}
+                        = image_tag 'dog-profile.jpg', alt: 'friend_image', class: 'card-img-top'
+                        .card-body 
+                            %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
+                            = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')
+                    
+
+                            
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-# %div.container-fluid.px-5.mb-5
+-#     %div.card.bg-dark.text-light
+-#         =image_tag 'dog_background_image.jpg', class: 'card-img-top'
+-#         %div.card-header
+-#             %div.d-flex.align-items-center.justify-content-between
+-#                 %h4= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
+-#                 - if current_user.id == params[:id].to_i || !(@friend.nil?)
+-#                     = render 'modals/user_modal', id: (params[:id].to_i), profile: @profile, friend: @friend
+-#             %p.card-subtitle.mb-2.text-muted 
+-#                 %span= @user_preferences.count
+-#                 %span preferences 
+-#             %p  
+-#                 - @user_preferences.each do |breed|
+-#                     %span.badge.rounded-pill.bg-primary= breed.name
+-#         %div.card-body
+-#             = render 'friends/request', profile: @profile, request: @request
+-#             %h6.card-text= "Email: #{@profile.email}"
+-#             %h6.card-text= "Birthdate: #{@profile.birthdate.strftime('%B %m, %Y')}"
+-#             %h6.card-text= "Gender: #{@profile.sex}"

@@ -25,7 +25,7 @@ class PagesController < ApplicationController
   end
 
   def view_friends
-    @friends = view_context.all_friends
+    @friends = view_context.all_friends(current_user.id)
   end
 
   def not_found; end

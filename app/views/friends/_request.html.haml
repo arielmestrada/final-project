@@ -1,12 +1,11 @@
 - unless (profile.id == current_user.id)
     - if request.nil?
-        = button_to('Add friend', add_friend_path(profile.id), class: "btn btn-success btn-sm my-2")
     - elsif (request.is_approver?) && !(request.is_friends?)
-        %div.d-flex
-            = button_to('Accept', accept_path(profile.id), class: 'btn btn-sm btn-success my-2', style: "margin-right: 10px")
-            = button_to("Decline", decline_path(profile.id), class: 'btn btn-sm btn-danger my-2')
+        %div.d-flex.my-3
+            = button_to('Accept', accept_path(profile.id), class: 'btn btn-sm btn-primary my-2', style: "margin-right: 10px")
+            = button_to("Decline", decline_path(profile.id), class: 'btn btn-sm btn-outline-primary my-2')
     - elsif request.is_friends?
-        %div.my-2.text-success.fw-bold
+        %div.my-3.text-success.fw-bold
             %i.fa-solid.fa-check
             %span Friends
     - else
