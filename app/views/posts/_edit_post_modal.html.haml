@@ -1,0 +1,16 @@
+%button.btn.btn-primary{"data-bs-target" => "#editPost", "data-bs-toggle" => "modal", :type => "button"}
+    Edit Post
+
+#editPost.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editPostLabel", :tabindex => "-1"}
+    .modal-dialog
+        .modal-content
+            .modal-header
+                %h5#editPostLabel.modal-title Edit Post
+                %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+            .modal-body
+                %div
+                    = form_with(model: [post.breed, post]) do |f|
+                        = f.text_field :body
+                        = f.submit
+            .modal-footer
+                %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel

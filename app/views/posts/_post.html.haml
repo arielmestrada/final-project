@@ -2,26 +2,18 @@
     %h3= post.body
     = button_to "Delete Post", breed_post_path(post.breed.id, post.id), method: :delete
 
-    %button.btn.btn-primary{"data-bs-target" => "#editPost", "data-bs-toggle" => "modal", :type => "button"}
-        Edit Post
-
-    #editPost.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editPostLabel", :tabindex => "-1"}
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    %h5#editPostLabel.modal-title Edit Post
-                    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
-                .modal-body
-                    %div
-                        = form_with(model: [post.breed, post]) do |f|
-                            = f.text_field :body
-                            = f.submit
-                .modal-footer
-                    %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel
-    
+    = render 'posts/edit_post_modal', post: post    
       
     %div{ id:"post_#{post.id}_comments" }
         = render post.comments, post: post
     = render 'comments/new_comment_form', post: post
 
-    
+.card{:style => "width: 18rem;", id:"post_#{post.id}", class:"post"}
+    .card-body
+        %h5.card-title 
+            = User.complete_name(post.user)
+        %h6.card-subtitle.mb-2.text-muted
+            = post.breed.name
+        %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+        %a.card-link{:href => "#"} Card link
+        %a.card-link{:href => "#"} Another link

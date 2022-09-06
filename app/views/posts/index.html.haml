@@ -1,7 +1,10 @@
-%h1= "Posts for #{@breed.name}"
-
-= turbo_stream_from "posts"
-%div#posts
-    = render 'posts/new_post_form'
-
-= render @posts
+.container-fluid.px-3.d-flex
+    .col-md-3
+        = render 'posts/post_left_panel'
+    .col-md-6.bg-secondary.vh-100
+        = turbo_stream_from "posts"
+        %div#posts.container.overflow-auto
+            = render 'posts/new_post_form'
+            = render @posts
+    .col-md-3
+        RIGHT

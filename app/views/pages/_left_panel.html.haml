@@ -3,7 +3,9 @@
         .d-flex.align-items-center
             %i.fa-solid.fa-user{style: 'margin-right: 5px;'}
             = "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}"
-    = link_to( root_path, class: 'text-decoration-none text-secondary btn h6 m-0') do
+
+    = link_to( channels_path, class: 'text-decoration-none text-secondary mb-3 h5') do
+
         .d-flex.align-items-center
             %i.fa-solid.fa-envelope{style: 'margin-right: 5px;'}
             Messages
