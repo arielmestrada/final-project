@@ -2,19 +2,4 @@
     %p= comment.user.first_name
     %p= comment.body
     = button_to "Delete Comment", breed_post_comment_path(comment.post.breed.id, comment.post.id, comment.id), method: :delete
-    %button.btn.btn-primary{"data-bs-target" => "#editComment", "data-bs-toggle" => "modal", :type => "button"}
-        Edit Comment
-
-    #editComment.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editCommentLabel", :tabindex => "-1"}
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    %h5#editCommentLabel.modal-title Edit Comment
-                    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
-                .modal-body
-                    %div
-                        = form_with(model: [comment.post.breed, comment.post, comment]) do |f|
-                            = f.text_field :body
-                            = f.submit
-                .modal-footer
-                    %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel
+    = render "comments/edit_comment_modal", comment: comment
