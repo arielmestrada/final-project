@@ -20,8 +20,9 @@
                     = link_to( edit_user_registration_path, class: "btn" ) do
                         %i.fa-solid.fa-user
                         Edit Profile
-                    %button.btn
+                    %button.btn{"data-bs-target": "#preferenceModal", "data-bs-toggle": "modal", "data-bs-dismiss": "modal"}
                         %i.fa-solid.fa-bone
-                        Add more preference
+                        Add preference
             .modal-footer 
                 %button.btn.btn-secondary{'data-bs-dismiss': 'modal'} Close
+= render 'modals/preference_modal'
