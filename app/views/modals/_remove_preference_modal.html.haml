@@ -1,0 +1,51 @@
+.modal.fade{id: "removepreferenceModal", "aria-hidden": "true", "aria-labelledby": "removepreferenceModal", tabindex: -1, 'data-bs-backdrop': 'static', 'data-bs-keyboard': "false" }
+    .modal-dialog
+        .modal-content
+            .modal-header
+                %h5.modal-title.text-warning{id: 'removepreferenceModal'} Removing Preference
+            .modal-body
+                - if current_user.user_preferences.count == 0
+                    %h6.text-warning No preferencess to remove
+                - else
+                    = form_tag remove_preference_path, method: :delete, class: "container", data:{ turbo_confirm: 'Are you sure?' } do
+                        %ul.list-group
+                            - current_user.user_preferences.each do |breed|
+                                %li.list-group-item.list-group-item-warning
+                                    .mask.modal-remove-pref
+                                        = check_box_tag("breed_names[]", breed)
+                                        = breed
+                        = submit_tag "Remove", class: "btn btn-sm btn-warning mt-2 invisible", "data-bs-dismiss": "modal", id: "remove_pref_submit"
+            .modal-footer
+                %button.btn.btn-secondary{"data-bs-toggle": 'modal', href: "#userModal", role: "button"} Close
+
+:javascript
+    var removemodalPref = document.querySelectorAll('.mask.modal-remove-pref')
+    var submit = document.querySelector('#remove_pref_submit')
+    var removecbox = document.querySelectorAll('.mask.modal-remove-pref input[type=checkbox]')
+
+    var empty = []
+
+    for(let i=0; i < removemodalPref.length; i++){
+        removemodalPref[i].addEventListener('click', ()=>{
+            if(removemodalPref[i].children[0].checked == true){
+                removemodalPref[i].children[0].checked = false
+                removecbox[i].style.opacity = 0
+                removecbox[i].style.transition = 'ease .3s'
+
+                empty.pop()
+                if(empty.length == 0){
+                    return submit.classList.add('invisible')
+                }
+            }
+            else{
+                removemodalPref[i].children[0].checked = true
+                removecbox[i].style.opacity = 1
+                removecbox[i].style.transition = 'ease .3s'
+
+                empty.push(true)
+                if(empty.length > 0){
+                    return submit.classList.remove('invisible')
+                }
+            }
+        })
+    }

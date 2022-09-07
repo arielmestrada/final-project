@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :new_user
   add_flash_types :info, :error, :warning, :success
 
-  protected  
+  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name mobile_number birthdate sex])
@@ -19,10 +19,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_out_path_for(_resource)
-    root_path
-  end
-
   def new_user
     if User.all.empty?
       @user = User.new
@@ -36,16 +32,17 @@ class ApplicationController < ActionController::Base
       @user.skip_confirmation!
       @user.save
 
-      @user2 = User.new
-      @user2.email = 'test2@email.com'
-      @user2.password = 'password'
-      @user2.password_confirmation = 'password'
-      @user2.first_name = 'Test2'
-      @user2.last_name = 'TestAgain2'
-      @user2.birthdate = '2001-01-01'
-      @user2.sex = 'male'
-      @user2.skip_confirmation!
-      @user2.save
+      @admin = User.new
+      @admin.email = 'admin@email.com'
+      @admin.password = 'password'
+      @admin.admin = true
+      @admin.password_confirmation = 'password'
+      @admin.first_name = 'Admin'
+      @admin.last_name = 'Admin Last name'
+      @admin.birthdate = '2000-01-01'
+      @admin.sex = 'male'
+      @admin.skip_confirmation!
+      @admin.save
       redirect_to root_path
     end
   end

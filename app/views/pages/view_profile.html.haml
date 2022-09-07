@@ -4,9 +4,15 @@
     .fb-profile-text
         %h1= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
         %p Lorem ipsum dolor sit amet
+
+        -# BUTTONS
         - if @profile.id == current_user.id
             = link_to('Edit Profile', edit_user_registration_path, class: "btn btn-outline-info btn-sm mb-3", style: "margin-right: 10px;")
         = render 'friends/request', profile: @profile, request: @request
+        - if @profile.banned?
+            %button.btn.btn-danger.disabled.mb-3 User is banned
+            
+        -# NAVIGATIONS LINK
         %ul.nav.nav-tabs
             %li.nav-item{role: 'presentation'}
                 %button.nav-link.active{id: 'home-tab', "data-bs-toggle": 'tab', "data-bs-target": '#home', "aria-controls": "home", "aria-selected": "true"} Details
@@ -19,7 +25,11 @@
                 - unless (@friend.nil?)
                     %li.nav-item
                         = button_to('Remove friend', unfriend_path(@profile.id), class: "nav-link bg-danger text-light", method: :delete, form:{ data:{ turbo_confirm: 'Are you sure?' } })
+
+        -# PROFILE NAV
         .container.tab-content.mt-4{id: 'myTabContent'}
+
+            -# TAB FOR DETAILS
             .tab-pane.fade.show.active{id: 'home', role: 'tabpanel', 'aria-labelledby': 'home-tab'}
                 %ul.list-group
                     %li.list-group-item.border-0.border-bottom.h6
@@ -35,6 +45,8 @@
                         %span= @profile.sex.capitalize
                     %li.list-group-item.border-0.border-bottom.h6
                         %span.text-muted.fst-italic= "Joined on #{@profile.created_at.strftime('%B %Y')}"
+
+            -# TAB FOR FRIENDS
             .tab-pane.fade{id: 'friends', role: 'tabpanel', 'aria-labelledby': 'friends-tab'}
                 - all_friends(@profile.id).each do |friend|
                     .card{style: 'width: 250px;'}

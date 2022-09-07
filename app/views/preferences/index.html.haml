@@ -1,23 +1,40 @@
 %div.container
-    %h1 Preferences
+    %h1.my-4.text-primary Choose your prefered breed
+    %hr
     = form_with url: "/preferences", method: :post do |f|
         .row
             - @preferences.each do |breed|
-                %div.pref.col-md-3
-                    .custom-control.custom-check.image-checkbox
-                        = f.check_box breed.name, {}, "true", "false"
-                        = f.label breed.name
-        = f.submit
+                .col-md-3
+                    .card.pref{style: "width: 16rem; margin-bottom: 10px;"}
+                        = image_tag "#{breed.image_url}", class: "card-img-top"
+                        = f.check_box breed.name, {class: "custom-control-input"}, "true", "false"
+                        .card-body.user-select-none
+                            %h5.text-primary
+                                = f.label breed.name, class: "card-title fw-bolder"
+                            %p.card-text
+                                %span.fw-bold Bred for:
+                                = breed.bred_for
+                            %p.card-text
+                                %span.fw-bold Facts:
+                                = breed.facts
+        = f.submit "Add", class: "btn btn-primary w-25 my-4"
 
 :javascript
-    const cbox = document.querySelectorAll(".pref")
+    var cbox = document.querySelectorAll(".pref")
+    var cboxBody = document.querySelectorAll(".pref .card-body")
     for(let i =0; i < cbox.length; i++ ){
         cbox[i].addEventListener('click', ()=>{
-           if (cbox[i].children[1].checked == true){
-            cbox[i].children[1].checked = false
-           }
-           else{
-            cbox[i].children[1].checked = true
-           }
+            
+          if (cbox[i].children[2].checked == true){
+            cbox[i].children[2].checked = false
+            cbox[i].children[2].classList.add('cbox-unchecked')
+            cbox[i].children[2].classList.remove('cbox-checked')
+          }
+          else{
+            cbox[i].children[2].checked = true
+            cbox[i].children[2].classList.add('cbox-checked')
+            cbox[i].children[2].classList.remove('cbox-unchecked')
+          }
+
         })
     }

@@ -16,11 +16,10 @@
                     = link_to('Dog Community', breeds_path, class: "nav-link text-primary")
                 .nav-item
                     = link_to('Friends', view_friends_path, class: "nav-link text-primary", id: 'friends_header')
-                /* If current user is admin
-                -# .nav-item
-                -#     = link_to('Users', channels_path, class: "nav-link")
-                .nav-item
-
+                - if current_user.admin?
+                    .nav-item 
+                        = link_to('Users', users_path, class: "nav-link text-primary")
+                        
             %div{style: 'margin-right: 5px;'}
                 = link_to( channels_path, class: "btn btn-info btn-sm text-light") do
                     %i.fa-solid.fa-envelope
