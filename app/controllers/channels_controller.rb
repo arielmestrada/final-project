@@ -1,6 +1,7 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_chat_var, only: %i[ index show ]
+  before_action :create_channels
 
   def index
     render :index
@@ -19,6 +20,13 @@ class ChannelsController < ApplicationController
 
   private
 
+  def create_channels
+    return unless Channel.all.empty?
+    Breed.all.each do |breed|
+      Channel.create(name: breed.name)
+    end
+  end
+
   def channel_params
     params.require(:channel).permit(:name)
   end
@@ -26,6 +34,6 @@ class ChannelsController < ApplicationController
   def set_chat_var
     @channel = Channel.new
     @channels = Channel.group_channels
-    @users = User.all_except(current_user.id)
+    @users = User.where(id: current_user.friends.map do |f| f.friend_id end )
   end
 end

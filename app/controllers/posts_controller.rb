@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :get_breed
 
   def index
+    @users = User.all
     @user = current_user
     @post = Post.new
     @posts = @breed.posts.order(created_at: :desc)

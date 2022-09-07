@@ -16,4 +16,8 @@ module PreferencesHelper
   def hide_preferences(breed)
     breed.select { |item| item unless current_user.user_preferences.include? item[:name] }
   end
+
+  def preferred?(dog_name, user = current_user)
+    user.user_preferences.include?(dog_name)
+  end
 end

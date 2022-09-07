@@ -10,8 +10,4 @@ module PagesHelper
   def find_friend(user)
     current_user.friends.find_by(friend_id: user.id)
   end
-
-  def friend(user)
-    current_user.friends.find_by(friend_id: user, is_friends: true)
-  end
 end

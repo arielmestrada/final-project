@@ -15,9 +15,6 @@ class User < ApplicationRecord
   validates :birthdate, presence: true
 
   has_many :friends
-  has_many :posts
-
-  def self.complete_name(user)
-    "#{user.first_name} #{user.last_name}"
-  end
+  has_many :posts  
+  
 end
