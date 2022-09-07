@@ -16,6 +16,14 @@ class BreedsController < ApplicationController
         @breed = Breed.create(breed_params)
     end
 
+    def add_preferred_breed
+        @breeds = Breed.all        
+        respond_to do |format|
+            current_user.update( user_preferences: current_user.user_preferences << params[:breed_name] )
+            format.html { redirect_to breeds_path, success: "You now prefer #{params[:breed_name]}!" }
+        end
+    end
+
     private
 
     def breed_params

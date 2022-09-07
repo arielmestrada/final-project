@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
+  patch 'preferences/:breed_name' => 'breeds#add_preferred_breed', as: 'add_preferred'
   delete 'user/:id/unfriend' => 'friends#unfriend', as: 'unfriend'
   post 'user/:id/decline' => 'friends#decline', as: 'decline'
   post 'user/:id/accept' => 'friends#accept', as: 'accept'

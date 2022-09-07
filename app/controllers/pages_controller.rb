@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < ApplicationController  
   before_action :authenticate_user!
   # root path
   def home; end

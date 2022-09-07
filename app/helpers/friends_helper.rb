@@ -82,4 +82,10 @@ module FriendsHelper
       User.find(id)
     end
   end
+
+  def friend_ids
+    current_user.friends.map do |f| 
+      f.friend_id 
+    end
+  end
 end
