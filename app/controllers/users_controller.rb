@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def index
     @users = User.where(admin: false)
   end
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
   def message
     @user = User.find(params[:id])
-    @users = User.where(id: current_user.friends.map do |f| f.friend_id end )
+    @users = User.where(id: current_user.friends.map { |f| f.friend_id })
 
     @channel = Channel.new
     @channels = Channel.group_channels

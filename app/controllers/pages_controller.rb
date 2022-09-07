@@ -7,6 +7,7 @@ class PagesController < ApplicationController
 
   def view_profile
     @friend = view_context.friend(params[:id].to_i)
+    binding.pry
     @profile = User.find(params[:id]) if params[:id].present?
     request = view_context.find_friend(@profile)
     @request = view_context.find_friend(@profile) unless request.nil?
