@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   devise_for :users
 
-  resources :users
+  resources :users, only: %i[index update]
 
   resources :preferences, only: %i[index create]
   resources :channels do
