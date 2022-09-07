@@ -4,6 +4,7 @@
     = render "breed_detail_modal", breed: breed
     %br/
     = link_to "News Feed", breed_posts_path(breed.id)
-    = button_to "Add Preferred"
+    - unless preferred?(breed.name)
+        = button_to "Add Preferred", add_preferred_path(breed.name), method: :patch
     %br/
     %br/

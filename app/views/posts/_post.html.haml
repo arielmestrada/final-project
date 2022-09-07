@@ -11,7 +11,7 @@
 .card{:style => "width: 18rem;", id:"post_#{post.id}", class:"post"}
     .card-body
         %h5.card-title 
-            = User.complete_name(post.user)
+            = complete_name(post.user)
         %h6.card-subtitle.mb-2.text-muted
             = post.breed.name
         %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.

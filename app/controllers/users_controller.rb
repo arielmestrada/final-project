@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def message
     @user = User.find(params[:id])
-    @users = User.all_except(current_user.id)
+    @users = User.where(id: current_user.friends.map do |f| f.friend_id end )
 
     @channel = Channel.new
     @channels = Channel.group_channels

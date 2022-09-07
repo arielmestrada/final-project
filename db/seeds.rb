@@ -232,3 +232,133 @@ Breed.create(
   temperament: %w[Outgoing Friendly Alert Gentle Intelligent],
   image_url: 'https://cdn2.thedogapi.com/images/S17ZilqNm_1280.jpg'
 )
+
+@user_01 = User.new(
+  email: "dummy01@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "John", 
+  last_name: "Middleton", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-01-01", 
+  sex: "male"
+)
+@user_01.skip_confirmation!
+@user_01.save!
+
+@user_02 = User.new(
+  email: "dummy02@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Blip", 
+  last_name: "Horton", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-02-02", 
+  sex: "male"
+)
+@user_02.skip_confirmation!
+@user_02.save!
+
+@user_03 = User.new(
+  email: "dummy03@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Lloyd", 
+  last_name: "Valenciaga", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-03-03", 
+  sex: "male"
+)
+@user_03.skip_confirmation!
+@user_03.save!
+
+@user_04 = User.new(
+  email: "dummy04@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Bob", 
+  last_name: "Hinge", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-04-04", 
+  sex: "male"
+)
+@user_04.skip_confirmation!
+@user_04.save!
+
+@user_05 = User.new(
+  email: "dummy05@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Lisa", 
+  last_name: "Ann", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-05-05", 
+  sex: "male"
+)
+@user_05.skip_confirmation!
+@user_05.save!
+
+@user_06 = User.new(
+  email: "dummy06@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Gerald", 
+  last_name: "Anderson", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-06-06", 
+  sex: "male"
+)
+@user_06.skip_confirmation!
+@user_06.save!
+
+@user_07 = User.new(
+  email: "dummy07@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Cliff", 
+  last_name: "Hanger", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-07-07", 
+  sex: "male"
+)
+@user_07.skip_confirmation!
+@user_07.save!
+
+@user_08 = User.new(
+  email: "dummy08@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Alps", 
+  last_name: "Coup", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-08-08", 
+  sex: "male"
+)
+@user_08.skip_confirmation!
+@user_08.save!
+
+@user_09 = User.new(
+  email: "dummy09@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Mathis", 
+  last_name: "Royer", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-09-09", 
+  sex: "male"
+)
+@user_09.skip_confirmation!
+@user_09.save!
+
+@user_10 = User.new(
+  email: "dummy10@email.com",
+  password: "123456",
+  password_confirmation: "123456",
+  first_name: "Favreau", 
+  last_name: "Evonne", 
+  mobile_number: 11111111111, 
+  birthdate: "1990-10-10", 
+  sex: "male"
+)
+@user_10.skip_confirmation!
+@user_10.save!
