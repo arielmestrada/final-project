@@ -1,0 +1,24 @@
+.container-fluid.mt-5
+    %table.table.table-primary.table-stripped
+        %thead
+            %tr
+                %th{scope: 'col'} User ID
+                %th{scope: 'col'} Full name
+                %th{scope: 'col'} Gender
+                %th{scope: 'col'} Date Created
+                %th.text-center{scope: 'col'} Options
+        %tbody
+            - @users.each do |user|
+                %tr
+                    %th{scope: 'row'}= user.id
+                    %td= "#{user.first_name} #{user.last_name}"
+                    %td= user.sex
+                    %td= user.created_at.strftime('%B %m, %Y')
+                    %td.d-flex.justify-content-center
+                        = link_to('View Profile', view_profile_path(user), class: 'btn btn-sm btn-primary')
+                        = link_to('Message', view_profile_path(user), class: 'btn btn-sm btn-outline-primary mx-3')
+                        - if user.banned?
+                            = button_to("Unbanned", user_path(user), class: 'btn btn-sm btn-warning', method: :patch, form:{data:{ turbo_confirm: "You're about to unban the user" }})
+                        - else
+                            = button_to("Banned", user_path(user), class: 'btn btn-sm btn-danger', method: :patch, form:{data:{ turbo_confirm: 'Are you sure?' }})
+                    

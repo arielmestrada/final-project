@@ -2,7 +2,7 @@
     .modal-dialog
         .modal-content
             .modal-header
-                %h5.modal-title{id: 'preferenceModal'} Preferences
+                %h5.modal-title.text-success{id: 'preferenceModal'} Adding Preference
             .modal-body
                 - if hide_preferences(Breed.all).count == 0
                     %h6.text-success All preferences was added
@@ -10,10 +10,43 @@
                     = form_with url: "/preferences", method: :post, class: "container" do |f|
                         %ul.list-group
                             - hide_preferences(Breed.all).each do |breed|
-                                %li.list-group-item.list-group-item-primary
-                                    .mask
+                                %li.list-group-item.list-group-item-success
+                                    .mask.modal-pref
                                         = f.check_box breed.name, {}, "true", "false"
                                         = f.label breed.name
-                        = f.submit "Add", class: "btn btn-sm btn-primary mt-2", "data-bs-dismiss": "modal"
+                        = f.submit "Add", class: "btn invisible btn-sm btn-success mt-2", "data-bs-dismiss": "modal", id: "add_pref_submit"
             .modal-footer
                 %button.btn.btn-secondary{"data-bs-toggle": 'modal', href: "#userModal", role: "button"} Close
+
+:javascript
+    var modalPref = document.querySelectorAll('.mask.modal-pref')
+    var addcbox = document.querySelectorAll('.mask.modal-pref input[type=checkbox]')
+    var add_pref_submit = document.querySelector('#add_pref_submit')
+
+
+    var add_arr = []
+
+    for(let i=0; i < modalPref.length; i++){
+        modalPref[i].addEventListener('click', ()=>{
+            if(modalPref[i].children[1].checked == true){
+                modalPref[i].children[1].checked = false
+                addcbox[i].style.opacity = 0
+                addcbox[i].style.transition = 'ease .3s'
+
+                add_arr.pop()
+                if(add_arr.length == 0){
+                    return add_pref_submit.classList.add('invisible')
+                }
+            }
+            else{
+                modalPref[i].children[1].checked = true
+                addcbox[i].style.opacity = 1
+                addcbox[i].style.transition = 'ease .3s'
+
+                add_arr.push(true)
+                if(add_arr.length > 0){
+                    return add_pref_submit.classList.remove('invisible')
+                }
+            }
+        })
+    }

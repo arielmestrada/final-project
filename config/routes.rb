@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'pages#home'
   devise_for :users
 
+  resources :users, only: %i[index update]
+
   resources :preferences, only: %i[index create]
   resources :channels do
     resources :messages
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'user/:id/message', to: 'users#message', as: 'user_message'
   resources :preferences, only: %i[index create]
+  delete '/remove_preference' => 'preferences#destroy', as: 'remove_preference'
   resources :friends, only: %i[index create]
 
   resources :breeds do

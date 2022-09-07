@@ -73,6 +73,41 @@ body::-webkit-scrollbar-thumb
 }
 }
 
+.card.pref{
+    position: relative;
+    cursor: pointer;
+}
+
+.card.pref > input{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 3px;
+    left: 3px;
+}
+
+.custom-control-input{
+    opacity: 0;
+}
+
+.custom-control-input.cbox-checked{
+    transition: .3s ease;
+    opacity: 1;
+}
+
+.custom-control-input.cbox-unchecked{
+    opacity: 0;
+    transition: .3s ease;
+}
+
+.list-group > .list-group-item.list-group-item-success, .list-group > .list-group-item-warning{
+    cursor: pointer;
+}
+
+.mask > input[type='checkbox']{
+    opacity: 0;
+}
+
 .message-box {
 width: fit-content;
 max-width: 40%;
