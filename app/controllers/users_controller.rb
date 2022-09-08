@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
   def index
-    @users = User.where(admin: false)
+    @users = User.where(admin: false).order('banned DESC')
   end
 
   def update

@@ -20,12 +20,16 @@
   </head>
   <body>
     <% if user_signed_in?  %>
-      <%= render 'layouts/alerts' %>
-      <%= render "layouts/header" %>
-      <div style='min-height: 100vh'>
+      <% if current_user.banned? %>
         <%= yield %>
-      </div>
-      <%= render 'layouts/footer' %>
+      <% else %>
+        <%= render 'layouts/alerts' %>
+        <%= render "layouts/header" %>
+        <div style='min-height: 100vh'>
+          <%= yield %>
+        </div>
+        <%= render 'layouts/footer' %>
+      <% end %>
     <% else %>
       <%= render 'layouts/alerts' %>
       <section class='container-fluid d-flex align-items-center justify-content-center'>

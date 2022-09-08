@@ -1,4 +1,12 @@
 class ApplicationController < ActionController::Base
+  rescue_from CanCan::AccessDenied do |exception|
+    if exception.message == 'Banned'
+      redirect_to banned_path
+    else
+      redirect_to root_path, alert: exception.message
+    end
+  end
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :new_user
   add_flash_types :info, :error, :warning, :success

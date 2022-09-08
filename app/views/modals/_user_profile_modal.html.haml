@@ -2,7 +2,7 @@
     = image_tag 'user.png', alt: 'user', class: '', width: '30px;'
 .modal.fade{id: "userModal", 'data-bs-backdrop': 'static', 'data-bs-keyboard': "false", tabindex: -1, 'aria-labelledby': 'userModal', 'aria-hidden': 'true'}
     .modal-dialog 
-        .modal-content 
+        .modal-content
             .modal-header
                 .d-flex.align-items-center
                     = image_tag 'user.png', alt: 'user', class: '', width: '100px;'
@@ -14,9 +14,10 @@
             .modal-body
                 %h5.fw-bold Settings
                 .d-flex.flex-column.align-items-start
-                    %button.btn
-                        %i.fa-solid.fa-moon
-                        Dark mode
+                    -# DARK MODE
+                    -# %button.btn
+                    -#     %i.fa-solid.fa-moon
+                    -#     Dark mode
                     = link_to( edit_user_registration_path, class: "btn" ) do
                         %i.fa-solid.fa-user
                         Edit Profile
