@@ -12,7 +12,7 @@
                         = button_to("Decline", decline_path(user.id), class: "btn btn-outline-primary w-100" )
             - waiting_request().each do |user|
                 .card{style: 'width: 250px;'}
-                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    = image_tag "#{user.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
                         .d-flex.justify-content-center.align-items-center.p-2.bg-success.text-light.rounded-2.user-select-none

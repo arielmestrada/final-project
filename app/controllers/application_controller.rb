@@ -29,21 +29,21 @@ class ApplicationController < ActionController::Base
 
   def new_user
     if User.all.empty?
-      @user = User.new
-      @user.email = 'test@email.com'
-      @user.password = 'password'
-      @user.image_url = "https://xsgames.co/randomusers/assets/avatars/male/2.jpg"
-      @user.password_confirmation = 'password'
-      @user.first_name = 'Test'
-      @user.last_name = 'TestAgain'
-      @user.birthdate = '2002-01-01'
-      @user.sex = 'male'
-      @user.skip_confirmation!
-      @user.save
+      # @user = User.new
+      # @user.email = 'test@email.com'
+      # @user.password = 'password'
+      # @user.image_url = "https://xsgames.co/randomusers/assets/avatars/male/2.jpg"
+      # @user.password_confirmation = 'password'
+      # @user.first_name = 'Test'
+      # @user.last_name = 'TestAgain'
+      # @user.birthdate = '2002-01-01'
+      # @user.sex = 'male'
+      # @user.skip_confirmation!
+      # @user.save
 
       @admin = User.new
       @admin.email = 'admin@email.com'
-      @admin.image_url = "https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
+      @admin.image_url = 'https://xsgames.co/randomusers/assets/avatars/male/1.jpg'
       @admin.password = 'password'
       @admin.admin = true
       @admin.password_confirmation = 'password'
