@@ -1,16 +1,19 @@
-%button.btn.btn-primary{"data-bs-target" => "#editComment", "data-bs-toggle" => "modal", :type => "button"}
-    Edit Comment
+%button.btn.mx-2.py-0{"data-bs-target" => "#editComment#{comment.id}", "data-bs-toggle" => "modal", :type => "button"}
+    %svg.bi.bi-three-dots{:fill => "currentColor", :height => "16", :viewbox => "0 0 16 16", :width => "16", :xmlns => "http://www.w3.org/2000/svg"}
+        %path{:d => "M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"}
 
-#editComment.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editCommentLabel", :tabindex => "-1"}
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "editComment#{comment.id}Label", :tabindex => "-1", id: "editComment#{comment.id}"}
     .modal-dialog
         .modal-content
             .modal-header
-                %h5#editCommentLabel.modal-title Edit Comment
+                %h5.modal-title{id: "editComment#{comment.id}Label"}
+                    Manage Comment
                 %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
             .modal-body
                 %div
-                    = form_with(model: [comment.post.breed, comment.post, comment]) do |f|
-                        = f.text_field :body
-                        = f.submit
+                    = form_with(model: [comment.post.breed, comment.post, comment], class: "form-group") do |f|
+                        = f.text_field :body, class: "form-control"
+                        = f.submit "Update Comment", class:"btn btn-primary", "data-bs-dismiss" => "modal"
+                = button_to "Delete Comment", breed_post_comment_path(comment.post.breed.id, comment.post.id, comment.id), method: :delete, class: "btn btn-danger", "data-bs-dismiss" => "modal"
             .modal-footer
                 %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel

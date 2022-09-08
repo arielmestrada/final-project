@@ -1,4 +1,4 @@
-%button.btn.btn-primary{"data-bs-target" => "#dogDetails#{breed.id}", "data-bs-toggle" => "modal", :type => "button"}
+%button.btn.btn-primary{"data-bs-target" => "#dogDetails#{breed.id}", "data-bs-toggle" => "modal", :type => "button", style: "margin: 1rem;"}   
     Dog Details
 
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "dogDetails#{breed.id}Label", :tabindex => "-1", "id" => "dogDetails#{breed.id}"}
@@ -9,9 +9,14 @@
                     =breed.name                             
                 %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
             .modal-body
-                %div
-                    %p= breed.bred_for
+                %div.text-start
                     %p= breed.facts
-                    %p= breed.temperament
+                    %p Bred for:
+                    %p.ps-5
+                        #{breed.bred_for}
+                    %p Attributes:
+                    -breed.temperament.each do |attr|
+                        %p.ps-5
+                            #{attr}
             .modal-footer
                 %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel

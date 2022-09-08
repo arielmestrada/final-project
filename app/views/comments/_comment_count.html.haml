@@ -1,0 +1,6 @@
+- unless defined?(post_i)
+    -post_i = post.id    
+%p.my-0{id: "comment-#{post_i}-count"}
+    - unless defined?(comment_c)
+        - comment_c = post.comments.count
+    = "#{comment_c} Comments"

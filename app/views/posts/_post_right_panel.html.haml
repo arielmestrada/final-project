@@ -1,0 +1,9 @@
+- unless same_pref_friend_ids(@breed.name).empty?
+    %h5.mt-2.mb-2 Friends
+    %div.container{style: 'margin-top: 10px;'}
+        - current_user.friends.each do |friend|
+            - if preferred?(@breed.name, Friend.user(friend))
+                = link_to( user_message_path(friend.friend_id), class: 'text-decoration-none text-secondary btn h6 m-0') do
+                    .d-flex.align-items-center.mb-1.text-secondary
+                        %i.fa-solid.fa-user{style: 'margin-right: 10px;'}
+                        = complete_name(Friend.user(friend))
