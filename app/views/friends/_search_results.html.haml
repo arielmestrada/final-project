@@ -7,7 +7,7 @@
             %div{"data-bs-dismiss": "modal", "aria-label": "Close"}
                 = link_to( view_profile_path(user), id: 'profile-link', class: 'btn border-0 btn-outline-primary w-100', style: 'margin-bottom: 5px;') do
                     %span.d-flex.align-items-center
-                        = image_tag 'user.png', style: "max-width: 50px;"
+                        = image_tag "#{user.image_url}", style: "max-width: 50px;", class: 'rounded-circle'
                         .d-flex.flex-column{style: "margin-left: 20px;"}
                             %h5
                                 %span= "#{highlight(user.first_name.capitalize, params[:username])}"

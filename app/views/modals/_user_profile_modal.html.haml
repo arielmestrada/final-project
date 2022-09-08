@@ -1,13 +1,13 @@
 %button.btn.rounded-circle.border-0.btn-sm{"data-bs-toggle": "modal", "data-bs-target": "#userModal"}
-    = image_tag 'user.png', alt: 'user', class: '', width: '30px;'
+    = image_tag "#{current_user.image_url}", alt: 'user', class: 'rounded-circle', width: '30px;'
 .modal.fade{id: "userModal", 'data-bs-backdrop': 'static', 'data-bs-keyboard': "false", tabindex: -1, 'aria-labelledby': 'userModal', 'aria-hidden': 'true'}
     .modal-dialog 
         .modal-content
             .modal-header
                 .d-flex.align-items-center
-                    = image_tag 'user.png', alt: 'user', class: '', width: '100px;'
+                    = image_tag "#{current_user.image_url}", alt: 'user', class: 'rounded-circle img-thumbnail', width: '100px;'
                     .d-flex.flex-column{style: 'margin-left: 10px;'}
-                        %h2= "#{current_user.first_name} #{current_user.last_name}"
+                        %h2= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}"
                         .d-flex
                             = link_to('My Profile', view_profile_path(current_user), class: "btn btn-outline-info btn-sm", style: "margin-right: 10px;")
                             = button_to('Sign Out', destroy_user_session_path, class: 'btn btn-outline-info btn-sm', method: :delete)
