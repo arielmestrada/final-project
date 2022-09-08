@@ -38,6 +38,25 @@ body::-webkit-scrollbar-thumb
 											  #2ab0ed 100%);
 }
 
+// 404 START
+.page_404 { 
+    padding:40px 0; 
+    background:#fff; 
+    font-family: 'Arvo', serif;
+}
+
+.page_404  img { 
+    width:100%;
+}
+
+.four_zero_four_bg {
+    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 400px;
+    background-position: center;
+}
+// 404 END
+
+// BANNED START
 .txt1 {color: #0070BB;
 	font-size: 40px;
   font-weight: 800;
@@ -214,7 +233,7 @@ The rotateX/Y reversal is easy since it's not animated, so just use its opposite
         transform: rotateZ(0deg) rotateY(30deg) rotateX(-75deg);
     }
 }
-
+// BANNED END
 
 .shadow-top {
 	-webkit-box-shadow: 0 -1rem 1rem rgba(0,0,0,.15);
@@ -222,6 +241,7 @@ The rotateX/Y reversal is easy since it's not animated, so just use its opposite
 	box-shadow: 0 -1rem 1rem rgba(0,0,0,.15);
 }
 
+// PROFILE
 .fb-profile img.fb-image-lg{
     z-index: 0;
     width: 100%;  
@@ -250,6 +270,7 @@ The rotateX/Y reversal is easy since it's not animated, so just use its opposite
     width: 20%; 
 }
 }
+// PROFILE END
 
 .card.pref{
     position: relative;

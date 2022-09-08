@@ -10,10 +10,10 @@ class Ability
       can :manage, User
       can :manage, :all
     elsif user.banned?
-      cannot :read, PagesController
+      cannot :manage, PagesController
     else
       cannot :manage, User
-      can :read, PagesController
+      can :manage, PagesController
     end
     # can :manage, Pages if user.banned?
     # can :manage, User if user.admin?
