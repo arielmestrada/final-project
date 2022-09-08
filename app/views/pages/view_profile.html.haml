@@ -1,6 +1,6 @@
 .fb-profile.container-fluid.mb-5
-    = image_tag 'dog_background_image.jpg', alt: 'user_background', class: 'fb-image-lg', align: 'left'
-    = image_tag 'user.png', alt: 'user_profile', class: 'fb-image-profile rounded-circle', align: 'left'
+    = image_tag "https://source.unsplash.com/random/400×300/?city,night", alt: 'user_background', class: 'fb-image-lg', align: 'left', height: "500px"
+    = image_tag "#{@profile.image_url}", alt: 'user_profile', class: 'img-thumbnail fb-image-profile rounded-circle', align: 'left'
     .fb-profile-text
         %h1= "#{@profile.first_name.capitalize} #{@profile.last_name.capitalize}"
         %p Lorem ipsum dolor sit amet

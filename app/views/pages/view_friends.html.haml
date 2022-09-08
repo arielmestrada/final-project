@@ -5,7 +5,7 @@
         .container-fluid
             - pending_friends().each do |user|
                 .card{style: 'width: 250px;'}
-                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    = image_tag "#{user.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
                         = button_to("Accept", accept_path(user.id), class:"btn btn-primary w-100 mb-2") 
@@ -30,7 +30,7 @@
         .container-fluid
             - @friends.each do |friend|
                 .card{style: 'width: 250px'}
-                    = image_tag 'dog-profile.jpg', class: "card-img-top", alt: "user_profile"
+                    = image_tag "#{friend.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
                         = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')

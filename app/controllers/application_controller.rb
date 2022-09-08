@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
       @user = User.new
       @user.email = 'test@email.com'
       @user.password = 'password'
+      @user.image_url = "https://xsgames.co/randomusers/assets/avatars/male/2.jpg"
       @user.password_confirmation = 'password'
       @user.first_name = 'Test'
       @user.last_name = 'TestAgain'
@@ -42,6 +43,7 @@ class ApplicationController < ActionController::Base
 
       @admin = User.new
       @admin.email = 'admin@email.com'
+      @admin.image_url = "https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
       @admin.password = 'password'
       @admin.admin = true
       @admin.password_confirmation = 'password'
