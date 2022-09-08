@@ -1,5 +1,6 @@
-class PagesController < ApplicationController  
+class PagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :read
   # root path
   def home; end
 
@@ -7,7 +8,6 @@ class PagesController < ApplicationController
 
   def view_profile
     @friend = view_context.friend(params[:id].to_i)
-    binding.pry
     @profile = User.find(params[:id]) if params[:id].present?
     request = view_context.find_friend(@profile)
     @request = view_context.find_friend(@profile) unless request.nil?
@@ -30,4 +30,10 @@ class PagesController < ApplicationController
   end
 
   def not_found; end
+
+  private
+
+  def read
+    authorize! :read, current_user if current_user.banned?
+  end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  root 'pages#dashboard'
   devise_for :users
 
   resources :users, only: %i[index update]
@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   post 'user/friends' => 'pages#search_friends', as: 'view_friends_post'
   get 'dashboard' => 'pages#dashboard', as: 'dashboard'
   get 'user/:id' => 'pages#view_profile', as: 'view_profile'
+  get 'banned' => 'pages#banned', as: 'banned'
   get '*path' => 'pages#not_found'
 end
