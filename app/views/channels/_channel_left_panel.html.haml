@@ -1,0 +1,24 @@
+.d-flex.flex-column.mt-5.container.align-items-start
+    %h6.text-secondary
+        Messages
+    = link_to( view_profile_path(current_user), class: "text-decoration-none text-secondary btn h6 m-0") do
+        .d-flex.align-items-center.text-secondary
+            %i.fa-solid.fa-user{style: 'margin-right: 5px;'}
+            = "#{complete_name(current_user)}'s Messages"
+    .container.my-3
+
+        %h6.mt-2.mb-2.text-secondary Friends
+        = turbo_stream_from "users"
+
+        %div#users
+            = render @users
+            
+    .container.my-3
+
+        %h6.text-secondary
+            Group Chat
+            
+        = turbo_stream_from "channels"
+
+        %div#channels
+            = render @channels

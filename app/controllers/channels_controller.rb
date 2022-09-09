@@ -35,5 +35,6 @@ class ChannelsController < ApplicationController
     @channel = Channel.new
     @channels = Channel.group_channels
     @users = User.where(id: current_user.friends.map do |f| f.friend_id end )
+    @all_users = User.all_except(current_user)
   end
 end
