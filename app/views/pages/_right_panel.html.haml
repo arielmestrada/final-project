@@ -6,12 +6,12 @@
             - current_user.friends.each do |user|
                 = link_to( user_message_path(user.friend_id), class: 'text-decoration-none text-secondary btn h6 m-0') do
                     .d-flex.align-items-center
-                        %i.fa-solid.fa-user
+                        %i.fa-solid.fa-user.me-1
                         = complete_name(Friend.user(user))
         Group Chat
         .container.mt-2.d-flex.flex-column.align-items-start
             - current_user.user_preferences.each do |dog|
                 = link_to( "/channels/#{Channel.find_by(name: dog).id}", class: 'text-decoration-none text-secondary btn h6 m-0') do
                     .d-flex.align-items-center
-                        %i.fa-solid.fa-dog
+                        %i.fa-solid.fa-dog.me-1
                         = dog

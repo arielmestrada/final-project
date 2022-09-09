@@ -2,5 +2,7 @@
     %div{class:'message-box msg-' + message.user.id.to_s}
         - unless message.channel.group == false
             %h6.name
-                = message.user.email
+                = complete_name(message.user)
+            %p.time
+                = "#{time_ago_in_words(message.created_at)} ago"
         = message.body
