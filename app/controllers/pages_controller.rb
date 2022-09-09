@@ -35,7 +35,7 @@ class PagesController < ApplicationController
   end
 
   private
-
+  
   def read
     authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end

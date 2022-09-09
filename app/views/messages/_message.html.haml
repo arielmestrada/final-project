@@ -1,8 +1,12 @@
 %div{class:'cont-' + message.user.id.to_s}
     %div{class:'message-box msg-' + message.user.id.to_s}
-        - unless message.channel.group == false
-            %h6.name
-                = complete_name(message.user)
-            %p.time
-                = "#{time_ago_in_words(message.created_at)} ago"
-        = message.body
+        .d-flex.align-items-center
+            = image_tag(message.user.image_url, class:'chat_pfp')
+            %div
+                %h6.name.my-0
+                    = complete_name(message.user)
+                %p.time
+                    = time_ago_in_words(message.created_at)
+                    ago
+        .message-body.text-start
+            = message.body
