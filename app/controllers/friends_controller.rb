@@ -1,4 +1,7 @@
 class FriendsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :read
+  
   def index; end
 
   def create
@@ -26,5 +29,9 @@ class FriendsController < ApplicationController
 
   def unfriend
     view_context.unfriend(params[:id])
+  end
+
+  def read
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 end

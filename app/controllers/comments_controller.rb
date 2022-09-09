@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :read
 
   def create
     @user = current_user
@@ -20,5 +21,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:user_id, :post_id, :body)
+  end
+
+  def read
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 end

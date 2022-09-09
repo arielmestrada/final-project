@@ -18,7 +18,7 @@
                 %button.nav-link.active{id: 'home-tab', "data-bs-toggle": 'tab', "data-bs-target": '#home', "aria-controls": "home", "aria-selected": "true"} Details
             %li.nav-item{role: 'presentation'}
                 %button.nav-link{id: 'friends-tab', "data-bs-toggle": 'tab', 'data-bs-target': '#friends', 'aria-controls': 'profile', 'aria-selected': 'false'} Friends
-            - if current_user.id != @profile.id
+            - if (current_user.id != @profile.id) && !(@profile.banned?)
                 - if @request.nil?
                     %li.nav-item
                         = button_to('Add friend', add_friend_path(@profile.id), class: "nav-link bg-primary text-light")
