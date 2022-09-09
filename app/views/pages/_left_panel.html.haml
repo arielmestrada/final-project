@@ -1,7 +1,7 @@
 .d-flex.flex-column.mt-5.container.align-items-start
     = link_to( view_profile_path(current_user), class: "text-decoration-none text-secondary btn h6 m-0") do
         .d-flex.align-items-center
-            %i.fa-solid.fa-user{style: 'margin-right: 5px;'}
+            = image_tag(current_user.image_url, class:'chat_pfp')
             = "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}"
     = link_to( channels_path, class: 'text-decoration-none text-secondary btn h6 m-0') do
         .d-flex.align-items-center
