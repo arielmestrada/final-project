@@ -1,10 +1,12 @@
-%div
-    = link_to breed.name, breed
-    %br/
-    = render "breed_detail_modal", breed: breed
-    %br/
-    = link_to "News Feed", breed_posts_path(breed.id)
-    - unless preferred?(breed.name)
-        = button_to "Add Preferred", add_preferred_path(breed.name), method: :patch
-    %br/
-    %br/
+.row.breed-container.mx-5.gy-5.px-5.my-1.justify-content-center
+    .card.breed-card.p-0.w-75.text-center
+        %img.card-img-top.breed-image{:alt => "#{breed.name}", :src => "#{breed.image_url}"}/
+        .card-body
+            %h5.card-title #{breed.name}
+            
+            .flex-row
+                = link_to "News Feed", breed_posts_path(breed.id), class: "btn btn-primary", style: "margin: 1rem;"   
+                = render "breed_detail_modal", breed: breed
+                - unless preferred?(breed.name)
+                    =button_to "Add Preferred", add_preferred_path(breed.name), method: :patch, :class => "btn btn-primary"
+            

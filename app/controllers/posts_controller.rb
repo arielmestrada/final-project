@@ -4,7 +4,8 @@ class PostsController < ApplicationController
 
   def index
     @users = User.all
-    @user = current_user
+    @user = current_user.id
+    
     @post = Post.new
     @posts = @breed.posts.order(created_at: :desc)
 

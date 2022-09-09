@@ -317,6 +317,14 @@ background-color: #555555 ;
 padding: 10px
 }
 
+// dog community page
+
+.breed-image {
+    height: 500px;
+    object-fit: cover;
+    object-position: 50% 20%
+}
+
 @import 'bootstrap';
 @import "font-awesome";
 
