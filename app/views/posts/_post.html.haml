@@ -1,19 +1,30 @@
-%div{ id:"post_#{post.id}", class:"post" }
-    %h3= post.body
-    = button_to "Delete Post", breed_post_path(post.breed.id, post.id), method: :delete
-
-    = render 'posts/edit_post_modal', post: post    
-      
-    %div{ id:"post_#{post.id}_comments" }
-        = render post.comments, post: post
-    = render 'comments/new_comment_form', post: post
-
-.card{:style => "width: 18rem;", id:"post_#{post.id}", class:"post"}
+.card.m-2{id:"post_#{post.id}", class:"post shadow p-3 mb-5 bg-white rounded"}
     .card-body
-        %h5.card-title 
-            = complete_name(post.user)
-        %h6.card-subtitle.mb-2.text-muted
-            = post.breed.name
-        %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-        %a.card-link{:href => "#"} Card link
-        %a.card-link{:href => "#"} Another link
+        .d-flex.justify-content-between
+            .d-flex
+                .d-flex.flex-column
+                    = image_tag(post.user.image_url, class:'chat_pfp')
+                .d-flex.flex-column
+                    %h5.card-title.d-flex.justify-content-between
+                        = complete_name(post.user)
+                    %p.time
+                        = time_ago_in_words(post.created_at)   
+                        ago 
+            .d-flex.flex-column.align-items-end
+                %h6.card-subtitle.mb-2.text-muted.fs-6
+                    = post.breed.name
+                - if @user == post.user.id
+                    = render 'posts/edit_post_modal', post: post                         
+        
+        %p.card-text.fs-4 #{post.body}
+        %hr.my-1
+        %ul.list-group.list-group-flush                       
+            %li.list-group-item
+                .d-flex.flex-row.justify-content-around
+                    %p.my-0
+                        = "#{post.likes} Likes"
+                    = render 'comments/comment_count', post: post
+        %hr.my-1.mb-4
+        %div{id: "post_#{post.id}_comments"}
+            = render post.comments, post: post
+        = render 'comments/new_comment_form', post: post

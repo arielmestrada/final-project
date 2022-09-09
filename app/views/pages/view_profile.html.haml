@@ -50,7 +50,7 @@
             .tab-pane.fade{id: 'friends', role: 'tabpanel', 'aria-labelledby': 'friends-tab'}
                 - all_friends(@profile.id).each do |friend|
                     .card{style: 'width: 250px;'}
-                        = image_tag 'dog-profile.jpg', alt: 'friend_image', class: 'card-img-top'
+                        = image_tag "#{friend.image_url}", alt: 'friend_image', class: 'card-img-top'
                         .card-body 
                             %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
                             = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')

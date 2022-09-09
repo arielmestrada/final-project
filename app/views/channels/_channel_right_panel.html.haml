@@ -1,0 +1,9 @@
+.d-flex.flex-column.mt-5.container.align-items-start
+    .container.my-3
+
+        %h6.mt-2.mb-2.text-secondary 
+            Users
+        = turbo_stream_from "users"
+
+        %div#users.d-flex.flex-column
+            = render partial: "users/user", collection: @all_users

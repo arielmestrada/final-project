@@ -84,8 +84,18 @@ module FriendsHelper
   end
 
   def friend_ids
-    current_user.friends.map do |f| 
-      f.friend_id 
+    current_user.friends.map do |friend| 
+      friend.friend_id 
     end
+  end
+
+  def same_pref_friend_ids(dog_name)
+    @friend_ids = Array.new
+    current_user.friends.each do |friend|
+      if Friend.user(friend).user_preferences.include?(dog_name)
+          @friend_ids << friend.friend_id  
+      end
+    end
+    return @friend_ids
   end
 end

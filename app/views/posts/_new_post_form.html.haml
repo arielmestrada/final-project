@@ -1,7 +1,6 @@
-%div.form-group.post-form
+%div.form-group.post-form.m-5
     = form_with(model:[@breed, @post], remote: true,
     data: {controller: "reset-form new-post", action: "turbo:submit-end->new-post#updateUserId"}) do |f|
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :breed_id, value: @breed.id
-        = f.text_field :body, class:"form-control", autocomplete: 'off', placeholder: "New post"
-        = f.submit data: {disable_with: false}, class:'btn btn-primary'
+        = f.text_field :body, class:"form-control", autocomplete: 'off', placeholder: "New post in #{@breed.name}"

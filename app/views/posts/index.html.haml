@@ -1,10 +1,10 @@
-.container-fluid.px-3.d-flex
+.container-fluid.px-3.d-flex.justify-content-center
     .col-md-3
         = render 'posts/post_left_panel'
-    .col-md-6.bg-secondary.vh-100
+    .col-md-4.vh-100.overflow-auto
         = turbo_stream_from "posts"
-        %div#posts.container.overflow-auto
-            = render 'posts/new_post_form'
+        = render 'posts/new_post_form'
+        %div#posts.container
             = render @posts
     .col-md-3
-        RIGHT
+        = render 'posts/post_right_panel'

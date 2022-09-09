@@ -1,7 +1,9 @@
 .container-fluid.px-3.d-flex.justify-content-center
     .col-md-3
         = render 'pages/left_panel'
-    .col-md-4.bg-secondary.vh-100
-        NEWS FEED
+    .col-md-4.vh-100.overflow-auto.center-column
+        = turbo_stream_from "posts"
+        %div#posts.container
+            = render @posts
     .col-md-3
         = render 'pages/right_panel'

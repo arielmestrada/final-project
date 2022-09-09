@@ -26,7 +26,11 @@ class UsersController < ApplicationController
   def message
     @user = User.find(params[:id])
     @users = User.where(id: current_user.friends.map { |f| f.friend_id })
+    @all_known_ids = current_user.friends.map do |f| f.friend_id end
+    @all_known_ids << current_user.id
+    @all_users = User.where.not( id: @all_known_ids )
 
+    @pref_channels = Channel.where(name: current_user.user_preferences)
     @channel = Channel.new
     @channels = Channel.group_channels
     @channel_name = get_name(@user, current_user)

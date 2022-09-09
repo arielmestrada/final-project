@@ -308,13 +308,63 @@ The rotateX/Y reversal is easy since it's not animated, so just use its opposite
 }
 
 .message-box {
-width: fit-content;
-max-width: 40%;
-padding: 5px;
-border-radius: 10px;
-margin-bottom: 10px;
-background-color: #555555 ;
-padding: 10px
+    width: fit-content;
+    max-width: 45%;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #555555 ;
+    padding: 10px
+}
+
+// remove scroll bar on center columns
+.center-column::-webkit-scrollbar {
+    display: none;
+}
+
+// chat
+.chat_pfp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.time {
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: .65rem
+}
+
+.name {
+    margin-top: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.msg-content {
+    width: 80%;
+    margin-right: 5px;
+}
+
+// .message-box {
+//     word-wrap: break-word;
+//     width: fit-content;
+//     max-width: 40%;
+//     padding: 5px;
+//     border-radius: 10px;
+//     margin-bottom: 10px;
+//     background-color: #555555;
+// }
+
+// dog community page
+
+.breed-image {
+    height: 500px;
+    object-fit: cover;
+    object-position: 50% 20%
 }
 
 @import 'bootstrap';

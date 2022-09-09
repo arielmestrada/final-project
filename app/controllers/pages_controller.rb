@@ -2,7 +2,14 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
   before_action :read
   # root path
-  def dashboard; end
+  def dashboard
+    @users = User.all
+    @user = current_user.id
+    
+    @posts = Post.all.order(created_at: :desc)
+
+    @comment = Comment.new
+  end
 
   def view_profile
     @friend = view_context.friend(params[:id].to_i)
@@ -28,7 +35,7 @@ class PagesController < ApplicationController
   end
 
   private
-
+  
   def read
     authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end

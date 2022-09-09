@@ -250,6 +250,30 @@ Breed.create(
 @admin.skip_confirmation!
 @admin.save!
 
+Channel.create(
+  name: 'Golden Retriever'
+)
+
+Channel.create(
+  name: 'German Shepherd'
+)
+
+Channel.create(
+  name: 'Rottweiler'
+)
+
+Channel.create(
+  name: 'Beagle'
+)
+
+Channel.create(
+  name: 'Dachshund'
+)
+
+Channel.create(
+  name: 'Siberian Husky'
+)
+
 @user_01 = User.new(
   email: 'dummy01@email.com',
   image_url: 'https://xsgames.co/randomusers/assets/avatars/male/3.jpg',

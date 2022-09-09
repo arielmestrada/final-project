@@ -1,5 +1,14 @@
-%div.comment{id:"post_#{comment.post.id}_comment_#{comment.id}"}
-    %p= comment.user.first_name
-    %p= comment.body
-    = button_to "Delete Comment", breed_post_comment_path(comment.post.breed.id, comment.post.id, comment.id), method: :delete
-    = render "comments/edit_comment_modal", comment: comment
+.container.mx-2.my-4{id:"post_#{comment.post.id}_comment_#{comment.id}"}
+    .d-flex
+        = image_tag(comment.user.image_url, class:'chat_pfp')
+        .card.comment.my-2
+            .card-body.py-1.px-2
+                
+                %h6.card-title.d-flex.justify-content-between.my-0
+                    = complete_name(comment.user)
+                    - if @user == comment.user.id
+                        = render "comments/edit_comment_modal", comment: comment
+                %p.card-text #{comment.body}
+    %p.time
+        = time_ago_in_words(comment.created_at)   
+        ago 
