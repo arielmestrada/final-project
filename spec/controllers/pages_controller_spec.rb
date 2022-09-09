@@ -11,13 +11,12 @@ RSpec.describe PagesController, type: :controller do
       birthdate: '2002-01-01'
     )
     @user.skip_confirmation!
+    @user.skip_confirmation_notification!
     sign_in @user
   end
 
-  describe '' do
-  end
-
-  after do
-    sign_out @user
+  it 'should show user profile' do
+    get :view_profile, params: { id: @user.id }
+    expect(response.status).to eq(302)
   end
 end
