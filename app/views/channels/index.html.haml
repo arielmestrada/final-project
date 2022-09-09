@@ -1,22 +1,24 @@
-%div#chatroom_container.row.bg-dark.text-light
-    %div#side_panel.col-md-4.col-sm-4
+.container-fluid.px-3.d-flex.justify-content-center
+    .col-md-3
+        %div#chatroom_container.row.bg-dark.text-light
+            %div#side_panel.col-md-4.col-sm-4
 
-        %h5
-            = complete_name(current_user)
+                %h5
+                    = complete_name(current_user)
 
-        %h4 Friends
-        = turbo_stream_from "users"
+                %h4 Friends
+                = turbo_stream_from "users"
 
-        %div#users
-            = render @users
+                %div#users
+                    = render @users
 
-        %h4 Group Chat
-        = turbo_stream_from "channels"
+                %h4 Group Chat
+                = turbo_stream_from "channels"
 
-        %div#channels
-            = render @channels
-    
-    %div#channel_container.col-md-8.col-sm-8.bg-dark.text-light
+                %div#channels
+                    = render @channels
+    .col-md-4.bg-secondary.vh-100
+        %div#channel_container.col-md-8.col-sm-8.bg-dark.text-light
         - if @single_channel
             %div#single_channel
             %h4.text-center
@@ -25,3 +27,5 @@
                 %div#messages
                     = render @messages
                 = render 'messages/new_message_form'
+    .col-md-3
+        Right
