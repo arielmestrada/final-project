@@ -13,7 +13,7 @@
                 %div
                     = form_with(model: [comment.post.breed, comment.post, comment], class: "form-group") do |f|
                         = f.text_field :body, class: "form-control"
-                        = f.submit "Update Comment", class:"btn btn-primary", "data-bs-dismiss" => "modal"
-                = button_to "Delete Comment", breed_post_comment_path(comment.post.breed.id, comment.post.id, comment.id), method: :delete, class: "btn btn-danger", "data-bs-dismiss" => "modal"
-            .modal-footer
+                        = f.submit "Update Comment", class:"btn btn-primary my-3", "data-bs-dismiss" => "modal"
+            .modal-footer.d-flex.justify-content-between
                 %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Cancel
+                = button_to "Delete Comment", breed_post_comment_path(comment.post.breed.id, comment.post.id, comment.id), method: :delete, class: "btn btn-danger", "data-bs-dismiss" => "modal"

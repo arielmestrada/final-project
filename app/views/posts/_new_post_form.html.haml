@@ -1,4 +1,4 @@
-%div.form-group.post-form.m-1
+%div.form-group.post-form.m-5
     = form_with(model:[@breed, @post], remote: true,
     data: {controller: "reset-form new-post", action: "turbo:submit-end->new-post#updateUserId"}) do |f|
         = f.hidden_field :user_id, value: current_user.id

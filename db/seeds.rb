@@ -233,6 +233,30 @@ Breed.create(
   image_url: 'https://cdn2.thedogapi.com/images/S17ZilqNm_1280.jpg'
 )
 
+Channel.create(
+  name: 'Golden Retriever'
+)
+
+Channel.create(
+  name: 'German Shepherd'
+)
+
+Channel.create(
+  name: 'Rottweiler'
+)
+
+Channel.create(
+  name: 'Beagle'
+)
+
+Channel.create(
+  name: 'Dachshund'
+)
+
+Channel.create(
+  name: 'Siberian Husky'
+)
+
 @user_01 = User.new(
   email: 'dummy01@email.com',
   image_url: 'https://xsgames.co/randomusers/assets/avatars/male/3.jpg',

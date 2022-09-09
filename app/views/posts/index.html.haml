@@ -1,7 +1,7 @@
 .container-fluid.px-3.d-flex.justify-content-center
     .col-md-3
         = render 'posts/post_left_panel'
-    .col-md-4.bg-secondary.vh-100.overflow-auto
+    .col-md-4.vh-100.overflow-auto
         = turbo_stream_from "posts"
         = render 'posts/new_post_form'
         %div#posts.container

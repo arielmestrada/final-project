@@ -1,15 +1,13 @@
-.d-flex.flex-column.mt-5.container
+.d-flex.flex-column.mt-5.container.align-items-start
     = link_to( "/channels/#{Channel.find_by(name: @breed.name).id}", class: "text-decoration-none text-secondary mb-3 h5") do
-        .d-flex.align-items-center
-            %i.fa-solid.fa-dog{style: 'margin-right: 5px;'}
-            = @breed.name    
+        %i.fa-solid.fa-dog{style: 'margin-right: 5px;'}
+        = @breed.name    
 
     - unless same_pref_user_ids(@breed.name).empty?
         %h5.mt-2.mb-2 Users
-        %div.container{style: 'margin-top: 10px;'}
-            .d-flex.align-items-center.mb-1.text-secondary
-                - @users.each do |user|
-                    - if find_friend(user).nil? && preferred?(@breed.name, user) && current_user.id != user.id
-                        = link_to( user_message_path(user.id), class: 'text-decoration-none text-secondary btn h6 m-0') do                    
-                            %i.fa-solid.fa-user{style: 'margin-right: 10px;'}
-                            = complete_name(user)
+        .d-flex.flex-column.mb-1.text-secondary.align-items-start
+            - @users.each do |user|
+                - if find_friend(user).nil? && preferred?(@breed.name, user) && current_user.id != user.id
+                    = link_to( user_message_path(user.id), class: 'text-decoration-none text-secondary btn h6 m-0') do                    
+                        = image_tag(user.image_url, class:'chat_pfp')
+                        = complete_name(user)

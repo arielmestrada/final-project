@@ -1,7 +1,14 @@
-.card.comment.my-2{id:"post_#{comment.post.id}_comment_#{comment.id}"}
-    .card-body.py-1.px-2
-        %h6.card-title.d-flex.justify-content-between.my-0
-            = complete_name(comment.user)
-            - if @user == comment.user.id
-                = render "comments/edit_comment_modal", comment: comment
-        %p.card-text #{comment.body}
+.container.mx-2.my-4{id:"post_#{comment.post.id}_comment_#{comment.id}"}
+    .d-flex
+        = image_tag(comment.user.image_url, class:'chat_pfp')
+        .card.comment.my-2
+            .card-body.py-1.px-2
+                
+                %h6.card-title.d-flex.justify-content-between.my-0
+                    = complete_name(comment.user)
+                    - if @user == comment.user.id
+                        = render "comments/edit_comment_modal", comment: comment
+                %p.card-text #{comment.body}
+    %p.time
+        = time_ago_in_words(comment.created_at)   
+        ago 

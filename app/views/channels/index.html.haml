@@ -2,14 +2,14 @@
     .col-md-3
         = render "channels/channel_left_panel"
 
-    .col-md-4.vh-100
+    .col-md-6.vh-100.overflow-auto.center-column#messages-center{data: {controller: "scroll"}}
         %div#channel_container.col-md-8.col-sm-8.text-light
         - if @single_channel
             %div#single_channel
-            %h4.text-center
+            %h4.text-center.m-3
                 = complete_name(@user) || "#{@single_channel.name} Group"
                 = turbo_stream_from @single_channel
-                %div#messages
+                %div#messages.m-3
                     = render @messages
                 = render 'messages/new_message_form'
     .col-md-3
