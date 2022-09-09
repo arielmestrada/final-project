@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     # cookies[:uid] = current_user&.id || 'guest'
     login_count = view_context.count_user_login
     if login_count > 1
-      dashboard_path
+      root_path
     else
       preferences_path
     end

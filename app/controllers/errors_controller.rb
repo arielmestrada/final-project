@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   def banned
-    redirect_to dashboard_path unless current_user.banned?
+    redirect_to root_path unless current_user.banned?
   end
 
   def not_found

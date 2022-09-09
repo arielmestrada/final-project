@@ -7,13 +7,13 @@ class Ability
     # Define abilities for the user here. For example:
     user ||= User.new
     if user.admin?
-      can :manage, User
       can :manage, :all
+      can :manage, UsersController
     elsif user.banned?
       cannot :manage, PagesController
     else
-      cannot :manage, User
       can :manage, PagesController
+      cannot :manage, UsersController
     end
     # can :manage, Pages if user.banned?
     # can :manage, User if user.admin?

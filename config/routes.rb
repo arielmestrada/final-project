@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
-  
+
   # errors
   patch 'preferences/:breed_name' => 'breeds#add_preferred_breed', as: 'add_preferred'
   delete 'user/:id/unfriend' => 'friends#unfriend', as: 'unfriend'
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # friends
   get 'user/friends' => 'pages#view_friends', as: 'view_friends'
   post 'user/friends' => 'pages#search_friends', as: 'view_friends_post'
-  get 'dashboard' => 'pages#dashboard', as: 'dashboard'
+  # get 'dashboard' => 'pages#dashboard', as: 'dashboard'
   get 'user/:id' => 'pages#view_profile', as: 'view_profile'
   get 'banned' => 'errors#banned', as: 'banned'
   get '*path' => 'errors#not_found'
