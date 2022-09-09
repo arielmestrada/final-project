@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: final-project_development
+  database: woofie-app_development
 
 test:
   <<: *default
-  database: final-project_test
+  database: woofie-app_test
 
 production:
   <<: *default
-  database: final-project_production
-  username: final-project
-  password: <%= ENV["FINAL-PROJECT_DATABASE_PASSWORD"] %>
+  database: woofie-app_production
+  username: woofie-app
+  password: <%= ENV["WOOFIE-APP_DATABASE_PASSWORD"] %>
