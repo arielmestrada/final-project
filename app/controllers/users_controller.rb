@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :read, only: [:index]
+
   def index
     @users = User.where(admin: false).order('banned DESC')
   end
@@ -42,5 +43,9 @@ class UsersController < ApplicationController
   def get_name(user1, user2)
     user = [user1, user2].sort
     "private_#{user[0].id}_#{user[1].id}"
+  end
+
+  def read
+    authorize! :read, current_user unless current_user.admin?
   end
 end

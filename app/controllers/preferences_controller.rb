@@ -8,9 +8,9 @@ class PreferencesController < ApplicationController
     respond_to do |format|
       count = view_context.fetch_preferences(params)
       if count == 0
-        format.html { redirect_to dashboard_path }
+        format.html { redirect_to root_path }
       else
-        format.html { redirect_to dashboard_path, notice: "You added #{count} preferences" }
+        format.html { redirect_to root_path, notice: "You added #{count} preferences" }
       end
     end
   end
@@ -23,9 +23,9 @@ class PreferencesController < ApplicationController
           user.user_preferences = user.user_preferences.reject { |pref| pref == breed }
           user.save
         end
-        format.html { redirect_to dashboard_path, alert: "Removed #{params[:breed_names].length} preferences" }
+        format.html { redirect_to root_path, alert: "Removed #{params[:breed_names].length} preferences" }
       else
-        format.html { redirect_to dashboard_path }
+        format.html { redirect_to root_path }
       end
     end
   end
