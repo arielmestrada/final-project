@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_breed
+  before_action :read
 
   def index
     @users = User.all
@@ -38,6 +39,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body, :user_id, :breed_id)
+  end
+
+  def read
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 
 end

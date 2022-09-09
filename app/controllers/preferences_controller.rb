@@ -1,5 +1,6 @@
 class PreferencesController < ApplicationController
   before_action :authenticate_user!
+  before_action :read
   def index
     @preferences = view_context.hide_preferences(Breed.all)
   end
@@ -28,5 +29,9 @@ class PreferencesController < ApplicationController
         format.html { redirect_to root_path }
       end
     end
+  end
+
+  def read
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 end

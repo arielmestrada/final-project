@@ -2,6 +2,7 @@ class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_chat_var, only: %i[ index show ]
   before_action :create_channels
+  before_action :read
 
   def index
     render :index
@@ -35,5 +36,9 @@ class ChannelsController < ApplicationController
     @channel = Channel.new
     @channels = Channel.group_channels
     @users = User.where(id: current_user.friends.map do |f| f.friend_id end )
+  end
+
+  def read
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 end

@@ -11,9 +11,24 @@ class Ability
       can :manage, UsersController
     elsif user.banned?
       cannot :manage, PagesController
-    else
-      can :manage, PagesController
+      cannot :manage, BreedsController
+      cannot :manage, ChannelsController
+      cannot :manage, CommentsController
+      cannot :manage, FriendsController
+      cannot :manage, MessagesController
+      cannot :manage, PostsController
+      cannot :manage, PreferencesController
       cannot :manage, UsersController
+    else
+      cannot :manage, UsersController
+      can :manage, PagesController
+      can :manage, BreedsController
+      can :manage, ChannelsController
+      can :manage, CommentsController
+      can :manage, FriendsController
+      can :manage, MessagesController
+      can :manage, PostsController
+      can :manage, PreferencesController
     end
     # can :manage, Pages if user.banned?
     # can :manage, User if user.admin?

@@ -233,6 +233,23 @@ Breed.create(
   image_url: 'https://cdn2.thedogapi.com/images/S17ZilqNm_1280.jpg'
 )
 
+# ADMIN
+@admin = User.new(
+  email: 'admin@email.com',
+  image_url: 'https://xsgames.co/randomusers/assets/avatars/male/1.jpg',
+  password: 'password',
+  password_confirmation: 'password',
+  admin: true,
+  first_name: 'Admin',
+  last_name: 'LastName',
+  mobile_number: 11_111_111_111,
+  birthdate: '2000-01-01',
+  sex: 'male'
+)
+
+@admin.skip_confirmation!
+@admin.save!
+
 @user_01 = User.new(
   email: 'dummy01@email.com',
   image_url: 'https://xsgames.co/randomusers/assets/avatars/male/3.jpg',

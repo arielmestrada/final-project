@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :read, only: [:index]
+  before_action :banned
 
   def index
     @users = User.where(admin: false).order('banned DESC')
@@ -47,5 +48,9 @@ class UsersController < ApplicationController
 
   def read
     authorize! :read, current_user unless current_user.admin?
+  end
+
+  def banned
+    authorize! :read, current_user, message: 'Banned' if current_user.banned?
   end
 end
