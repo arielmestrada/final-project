@@ -2,16 +2,16 @@
     - if pending_request().count > 0 || waiting_request().count > 0
         .border-bottom.border-dark.w-25.mb-4.pb-2
             %h4.m-0.p-0 Friend Requests
-        .container-fluid
+        .container-fluid.d-flex
             - pending_friends().each do |user|
-                .card{style: 'width: 250px;'}
+                .card.m-2{style: 'width: 250px;'}
                     = image_tag "#{user.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
                         = button_to("Accept", accept_path(user.id), class:"btn btn-primary w-100 mb-2") 
                         = button_to("Decline", decline_path(user.id), class: "btn btn-outline-primary w-100" )
             - waiting_request().each do |user|
-                .card{style: 'width: 250px;'}
+                .card.m-2{style: 'width: 250px;'}
                     = image_tag "#{user.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
@@ -27,12 +27,12 @@
     .my-3{id: "search_friends_results"}
 
     .mb-5
-        .container-fluid
+        .container-fluid.d-flex
             - @friends.each do |friend|
-                .card{style: 'width: 250px'}
+                .card.m-2{style: 'width: 250px'}
                     = image_tag "#{friend.image_url}", class: "card-img-top", alt: "user_profile"
                     .card-body
                         %h5.fw-bolder.mb-2= "#{friend.first_name.capitalize} #{friend.last_name.capitalize}"
                         = link_to('View Profile', view_profile_path(friend), class: 'btn btn-primary mb-2 w-100')
-                        = link_to('Message', root_path, class: 'btn  btn-outline-primary w-100')
+                        = link_to('Message', user_message_path(friend.id), class: 'btn  btn-outline-primary w-100')
     

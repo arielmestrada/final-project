@@ -16,7 +16,7 @@
                     %td= user.created_at.strftime('%B %m, %Y')
                     %td.d-flex.justify-content-center
                         = link_to('View Profile', view_profile_path(user), class: 'btn btn-sm btn-primary')
-                        = link_to('Message', view_profile_path(user), class: 'btn btn-sm btn-outline-primary mx-3')
+                        = link_to('Message', user_message_path(user.id), class: 'btn btn-sm btn-outline-primary mx-3')
                         - if user.banned?
                             = button_to("Unbanned", user_path(user), class: 'btn btn-sm btn-warning', method: :patch, form:{data:{ turbo_confirm: "You're about to unban the user" }})
                         - else

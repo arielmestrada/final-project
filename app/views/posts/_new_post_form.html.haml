@@ -3,4 +3,4 @@
     data: {controller: "reset-form new-post", action: "turbo:submit-end->new-post#updateUserId"}) do |f|
         = f.hidden_field :user_id, value: current_user.id
         = f.hidden_field :breed_id, value: @breed.id
-        = f.text_field :body, class:"form-control", autocomplete: 'off', placeholder: "New post in #{@breed.name}"
+        = f.text_field :body, class:"form-control shadow-sm p-3 mb-5 bg-white rounded", autocomplete: 'off', placeholder: "New post in #{@breed.name}"
