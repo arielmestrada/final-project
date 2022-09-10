@@ -7,6 +7,7 @@ RSpec.describe PagesController, type: :controller do
       password: 'password',
       password_confirmation: 'password',
       first_name: 'rspec',
+      image_url: 'https://xsgames.co/randomusers/assets/avatars/male/1.jpg',
       last_name: 'rspecLastname',
       birthdate: '2002-01-01'
     )

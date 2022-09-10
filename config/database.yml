@@ -9,7 +9,7 @@ development:
 
 test:
   <<: *default
-  database: final-project_test
+  database: final-project
 
 production:
   <<: *default

@@ -3,7 +3,7 @@
     .container.mt-4
         -unless friend_ids.empty?
             Friends
-            .container.my-2
+            .container.my-2.d-flex.flex-column
                 - current_user.friends.where(is_friends: true).each do |user|
                     = link_to( user_message_path(user.friend_id), class: 'text-decoration-none text-secondary btn h6 m-0') do
                         .d-flex.align-items-center
